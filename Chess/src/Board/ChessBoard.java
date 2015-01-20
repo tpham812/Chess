@@ -19,7 +19,7 @@ public class ChessBoard {
 		whtPieces = new ArrayList<Piece>();
 		blkKing = null;
 		whtKing = null;
-		
+		createChessBoard();	
 	}
 	
 	private void createChessBoard() {
@@ -27,20 +27,20 @@ public class ChessBoard {
 		for(int i = 0; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
 				if(i == 0) {
-					if(j == 0 || j == 7) {chessBoard[i][j] = new Rook('b', i, j); blkPieces.add(chessBoard[i][j]);}
-					else if(j == 1 || j == 6) {chessBoard[i][j] = new Knight('b', i, j); blkPieces.add(chessBoard[i][j]);}
-					else if(j == 2 || j == 5) {chessBoard[i][j] = new Bishop('b', i, j); blkPieces.add(chessBoard[i][j]);}
-					else if(j == 4) {chessBoard[i][j] = new King('b', i , j); blkPieces.add(chessBoard[i][j]);}
-					else if (j == 3) { chessBoard[i][j] = new Queen('b', i, j); blkPieces.add(chessBoard[i][j]);}
+					if(j == 0 || j == 7) { Rook rook = new Rook('b', i, j); chessBoard[i][j] = rook; blkPieces.add(rook); }
+					else if(j == 1 || j == 6) { Knight knight = new Knight('b', i, j); chessBoard[i][j] = knight; blkPieces.add(knight); }
+					else if(j == 2 || j == 5) { Bishop bishop = new Bishop('b', i, j); chessBoard[i][j] = bishop; blkPieces.add(bishop); }
+					else if(j == 4) { King king = new King('b', i , j); chessBoard[i][j] = king; blkKing = king; blkPieces.add(king); }
+					else if (j == 3) { Queen queen = new Queen('b', i, j); chessBoard[i][j] = queen; blkPieces.add(queen); }
 				}
-				else if(i == 1) {chessBoard[i][j] = new Pawn('b', i, j); blkPieces.add(chessBoard[i][j]);}
-				else if (i == 6) {chessBoard[i][j] = new Pawn('w', i, j); whtPieces.add(chessBoard[i][j]);}
+				else if(i == 1) { Pawn pawn = new Pawn('b', i, j); chessBoard[i][j] = pawn; blkPieces.add(pawn); }
+				else if (i == 6) { Pawn pawn = new Pawn('w', i, j); chessBoard[i][j] = pawn; whtPieces.add(pawn); }
 				else if(i == 7) {
-					if(j == 0 || j == 7) {chessBoard[i][j] = new Rook('w', i, j); whtPieces.add(chessBoard[i][j]);}
-					else if(j == 1 || j == 6) {chessBoard[i][j] = new Knight('w', i, j); whtPieces.add(chessBoard[i][j]);}
-					else if(j == 2 || j == 5) {chessBoard[i][j] = new Bishop('w', i, j); whtPieces.add(chessBoard[i][j]);}
-					else if(j == 4) {chessBoard[i][j] = new King('w', i, j); whtPieces.add(chessBoard[i][j]);}
-					else if (j == 3) {chessBoard[i][j] = new Queen('w', i, j); whtPieces.add(chessBoard[i][j]);}
+					if(j == 0 || j == 7) { Rook rook = new Rook('w', i, j); chessBoard[i][j] = rook; whtPieces.add(rook);}
+					else if(j == 1 || j == 6) { Knight knight = new Knight('w', i, j); chessBoard[i][j] = knight; whtPieces.add(knight);}
+					else if(j == 2 || j == 5) { Bishop bishop = new Bishop('w', i, j); chessBoard[i][j] = bishop; whtPieces.add(bishop);}
+					else if(j == 4) { King king = new King('w', i, j); chessBoard[i][j] = king; whtKing = king; whtPieces.add(king);}
+					else if (j == 3) { Queen queen = new Queen('w', i, j); chessBoard[i][j] = queen; whtPieces.add(queen);}
 				}
 				else if (i == 2 || i == 3 || i == 4 || i == 5) {chessBoard[i][j] = null;}
 			}
