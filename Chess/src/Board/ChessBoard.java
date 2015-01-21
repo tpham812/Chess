@@ -26,7 +26,8 @@ public class ChessBoard {
 		
 		for(int i = 0; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
-				if(i == 0) {
+				if (i > 1 && i < 6) {chessBoard[i][j] = null;}
+				else if(i == 0) {
 					if(j == 0 || j == 7) { Rook rook = new Rook('b', i, j); chessBoard[i][j] = rook; blkPieces.add(rook); }
 					else if(j == 1 || j == 6) { Knight knight = new Knight('b', i, j); chessBoard[i][j] = knight; blkPieces.add(knight); }
 					else if(j == 2 || j == 5) { Bishop bishop = new Bishop('b', i, j); chessBoard[i][j] = bishop; blkPieces.add(bishop); }
@@ -42,7 +43,6 @@ public class ChessBoard {
 					else if(j == 4) { King king = new King('w', i, j); chessBoard[i][j] = king; whtKing = king; whtPieces.add(king);}
 					else if (j == 3) { Queen queen = new Queen('w', i, j); chessBoard[i][j] = queen; whtPieces.add(queen);}
 				}
-				else if (i == 2 || i == 3 || i == 4 || i == 5) {chessBoard[i][j] = null;}
 			}
 		}
 	}
@@ -68,8 +68,8 @@ public class ChessBoard {
 					else if(chessBoard[i][j] instanceof King) {if(chessBoard[i][j].player == 'b') System.out.print("bK "); else System.out.print("wK ");}
 				}
 				else {
-					if(i == 0 || i == 2 || i == 4 || i == 6) {if(j == 0 || j % 2 == 0) System.out.print("   "); else System.out.print("## ");}
-					else if(i == 1 || i == 3 || i == 5 || i == 7) {if(j == 0 || j % 2 == 0) System.out.print("## "); else System.out.print("   ");}
+					if(i % 2 == 0) {if(j % 2 == 0) System.out.print("   "); else System.out.print("## ");}
+					else {if(j % 2 == 0) System.out.print("## "); else System.out.print("   ");}
 				}
 			}
 			System.out.println();
