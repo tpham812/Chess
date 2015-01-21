@@ -2,14 +2,26 @@ package Pieces;
 
 public abstract class Piece {
 
-	public final char player;
+	public char player;
 	public int row;
 	public int column;
+	public boolean[][] possibleMoves;
 	
 	public Piece(char player, int row, int column) {
 		
 		this.player = player;
 		this.row = row;
 		this.column = column;
+		possibleMoves= new boolean[8][8];
+		setPMFalse();
+	}
+	
+	protected void setPMFalse() {
+		
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				possibleMoves[i][j] = false;
+			}
+		}
 	}
 }
