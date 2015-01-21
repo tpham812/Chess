@@ -5,7 +5,7 @@ public abstract class Piece {
 	public char player;
 	public int row;
 	public int column;
-	public boolean[][] possibleMoves;
+	protected boolean[][] possibleMoves;
 	
 	public Piece(char player, int row, int column) {
 		
