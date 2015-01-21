@@ -7,4 +7,10 @@ public class Rook extends Piece {
 	
 	}
 
+	@Override
+	public void updatePossibleMoves() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

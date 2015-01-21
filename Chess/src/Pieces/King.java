@@ -7,4 +7,10 @@ public class King extends Piece {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void updatePossibleMoves() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
