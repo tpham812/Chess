@@ -13,4 +13,9 @@ public class Knight extends Piece {
 		
 	}
 
+	public void updatePosition(int newRow, int newColumn) {
+		
+		row = newRow;
+		column = newColumn;
+	}
 }

@@ -26,4 +26,5 @@ public abstract class Piece {
 	}
 	
 	public abstract void updatePossibleMoves();
+	public abstract void updatePosition(int newRow, int newColumn);
 }

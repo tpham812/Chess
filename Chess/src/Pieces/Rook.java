@@ -13,4 +13,9 @@ public class Rook extends Piece {
 		
 	}
 
+	public void updatePosition(int newRow, int newColumn) {
+		
+		row = newRow;
+		column = newColumn;
+	}
 }
