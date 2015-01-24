@@ -34,8 +34,8 @@ public class ChessBoard {
 					else if(j == 4) { King king = new King('b', i , j); chessBoard[i][j] = king; blkKing = king; blkPieces.add(king); }
 					else if (j == 3) { Queen queen = new Queen('b', i, j); chessBoard[i][j] = queen; blkPieces.add(queen); }
 				}
-				else if(i == 1) { Pawn pawn = new Pawn('b', i, j); chessBoard[i][j] = pawn; blkPieces.add(pawn); }
-				else if (i == 6) { Pawn pawn = new Pawn('w', i, j); chessBoard[i][j] = pawn; whtPieces.add(pawn); }
+				else if(i == 1) { Pawn pawn = new Pawn('b', i, j, 1); chessBoard[i][j] = pawn; blkPieces.add(pawn); }
+				else if (i == 6) { Pawn pawn = new Pawn('w', i, j, -1); chessBoard[i][j] = pawn; whtPieces.add(pawn); }
 				else if(i == 7) {
 					if(j == 0 || j == 7) { Rook rook = new Rook('w', i, j); chessBoard[i][j] = rook; whtPieces.add(rook);}
 					else if(j == 1 || j == 6) { Knight knight = new Knight('w', i, j); chessBoard[i][j] = knight; whtPieces.add(knight);}

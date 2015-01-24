@@ -8,7 +8,7 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public void updatePossibleMoves() {
+	public void updatePossibleMoves(Piece[][] chessBoard) {
 		// TODO Auto-generated method stub
 		
 	}
