@@ -10,7 +10,6 @@ public class Pawn extends Piece {
 		
 		super(player, row, column);
 		firstMove = false;
-		move2Ranks = false;
 		this.direction = direction;
 	}
 
@@ -20,7 +19,7 @@ public class Pawn extends Piece {
 		Piece piece, piece2;
 
 		setMovesFalse();
-
+		move2Ranks = false;
 		newRow = row + direction;
 		if(newRow >= 0 && newRow < 8) {
 			newColumn = column - 1;
@@ -28,7 +27,7 @@ public class Pawn extends Piece {
 				piece = chessBoard[newRow][newColumn];
 				piece2 = chessBoard[row][newColumn];
 				if(piece == null && piece2 != null && piece2.player != player) {
-					if(piece2 instanceof Pawn && ((Pawn)piece2).firstMove == true && ((Pawn)piece2).move2Ranks == true) 
+					if(piece2 instanceof Pawn &&  ((Pawn)piece2).move2Ranks == true && ((Pawn)piece2).firstMove == true) 
 						moves[newRow][newColumn] = true;
 				}
 				else if(piece != null && piece.player != player )
@@ -39,7 +38,7 @@ public class Pawn extends Piece {
 				piece = chessBoard[newRow][newColumn];
 				piece2 = chessBoard[row][newColumn];
 				if(piece == null && piece2 != null && piece2.player != player) {
-					if(piece2 instanceof Pawn && ((Pawn)piece2).firstMove == true && ((Pawn)piece2).move2Ranks == true) 
+					if(piece2 instanceof Pawn && ((Pawn)piece2).move2Ranks == true && ((Pawn)piece2).firstMove == true) 
 						moves[newRow][newColumn] = true;
 				}
 				else if(piece != null && piece.player != player)
@@ -55,8 +54,6 @@ public class Pawn extends Piece {
 				}
 			}
 		}
-		if(firstMove) 
-			firstMove = false;
 	}
 	
 	public void updatePosition(int newRow, int newColumn) {
