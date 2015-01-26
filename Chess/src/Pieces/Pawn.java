@@ -6,7 +6,7 @@ public class Pawn extends Piece {
 	private boolean move2Ranks;
 	private int direction;
 	
-	public Pawn(char player, int row, int column, int direction) {
+	public Pawn(boolean player, int row, int column, int direction) {
 		
 		super(player, row, column);
 		firstMove = false;
@@ -15,40 +15,38 @@ public class Pawn extends Piece {
 	}
 
 	public void updatePossibleMoves(Piece[][] chessBoard) {
-	
-		int newRow = 0;
-		int newColumn = 0; 
+
+		int newRow = 0, newColumn = 0; 
 		Piece piece;
-		
+
 		setMovesFalse();
-		possibleMoves.clear();
-		
-		newRow = row + (direction * 1);
-		if(chessBoard[newRow][column] != null) {
-			moves[newRow][column] = true;
-			possibleMoves.add(newRow * 10 + column);
-		}
-		newColumn = column - 1;
-		piece = chessBoard[newRow][newColumn];
-		if(newColumn >= 0 && piece != null && piece.player != player ) {
-			moves[newRow][newColumn] = true;
-			possibleMoves.add(newRow * 10 + newColumn);
-		}
-		newColumn = column + 1;
-		piece = chessBoard[newRow][newColumn];
-		if(newColumn < 8  && piece != null && piece.player != player) {
-			moves[newRow][newColumn] = true;
-			possibleMoves.add(newRow * 10 + newColumn);
-		}
-		if(!firstMove) {
-			newRow = row + (direction * 2);
-			if(chessBoard[newRow][column] != null) {
+
+		newRow = row + direction;
+		if(newRow >= 0 && newRow <= 8) {
+			newColumn = column - 1;
+			if(newColumn >= 0 ) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece != null && piece.player != player )
+					moves[newRow][newColumn] = true;
+			}
+			newColumn = column + 1;
+			if(newColumn < 8  ) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece != null && piece.player != player)
+					moves[newRow][newColumn] = true;
+			}
+			if(chessBoard[newRow][column] == null) {
 				moves[newRow][column] = true;
-				possibleMoves.add(newRow * 10 + column);
+				if(!firstMove) {
+					newRow = row + (direction * 2);
+					if(chessBoard[newRow][column] == null) {
+						moves[newRow][column] = true;
+					}
+				}
 			}
 		}
 	}
-
+	
 	public void updatePosition(int newRow, int newColumn) {
 		
 		row = newRow;

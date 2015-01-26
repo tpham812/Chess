@@ -2,7 +2,7 @@ package Pieces;
 
 public class Bishop extends Piece {
 
-	public Bishop(char player, int row, int column) {
+	public Bishop(boolean player, int row, int column) {
 		super(player, row, column);
 
 	}
