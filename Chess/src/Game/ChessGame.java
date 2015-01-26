@@ -45,7 +45,7 @@ public class ChessGame {
 			String input = br.readLine();
 			parsePlayerInput(input);
 			if(draw) {
-				System.out.print("\nDraw Game. No winners.\n");
+				System.out.print("\nDraw Game. No winner.\n");
 				break;
 			}
 			if(!badInput) 
