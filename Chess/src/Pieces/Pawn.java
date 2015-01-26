@@ -17,7 +17,7 @@ public class Pawn extends Piece {
 	public void updatePossibleMoves(Piece[][] chessBoard) {
 	
 		int newRow = 0;
-		int newColumn = 0;
+		int newColumn = 0; 
 		Piece piece;
 		
 		setMovesFalse();
