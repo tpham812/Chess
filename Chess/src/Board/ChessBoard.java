@@ -111,6 +111,14 @@ public class ChessBoard {
 		
 		return chessBoard[row][column];
 	}
+		
+	public Piece getKing(boolean player) {
+		
+		if(player)
+			return whtKing;
+		
+		return blkKing;
+	}
 	
 	public void printPossibleMoves(int row, int column) {
 		chessBoard[row][column].printPossibleMoves();
