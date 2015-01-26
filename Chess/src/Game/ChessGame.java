@@ -53,7 +53,7 @@ public class ChessGame {
 					if(isPlayerPiece()) {
 						if(isValidMove()) {
 							chessBoard.movePiece(row, column, newRow, newColumn);
-							chessBoard.updatePossibleMoves(player);
+							chessBoard.updatePossibleMoves(!player);
 							player = !player;
 						}
 						else 

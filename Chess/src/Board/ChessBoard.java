@@ -94,6 +94,9 @@ public class ChessBoard {
 	public void movePiece(int row, int column, int newRow, int newColumn) {
 		
 		Piece piece = chessBoard[row][column];
+		if(piece instanceof Pawn && chessBoard[newRow][newColumn] == null) {
+			chessBoard[row][newColumn] = null;
+		}
 		chessBoard[newRow][newColumn] = piece;
 		chessBoard[row][column] = null;
 		piece.updatePosition(newRow, newColumn);
