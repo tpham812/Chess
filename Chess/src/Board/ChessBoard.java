@@ -6,20 +6,17 @@ import Pieces.*;
 
 public class ChessBoard {
 
-	private static Piece[][] chessBoard;				private static Piece[][] testingChessBoard;
+	private static Piece[][] chessBoard;				
 	private static Piece blkKing;
 	private static Piece whtKing;
-	private static ArrayList<Piece> blkPieces;			private static ArrayList<Piece> testingBlkPieces;
-	private static ArrayList<Piece> whtPieces;			private static ArrayList<Piece> testingWhtPieces;
+	private static ArrayList<Piece> blkPieces;			
+	private static ArrayList<Piece> whtPieces;			
 	
 	public ChessBoard() {
 		
 		chessBoard = new Piece[8][8];
-		testingChessBoard = new Piece[8][8];
 		blkPieces = new ArrayList<Piece>();
 		whtPieces = new ArrayList<Piece>();
-		testingBlkPieces = new ArrayList<Piece>();
-		testingWhtPieces = new ArrayList<Piece>();
 		blkKing = null;
 		whtKing = null;
 		createChessBoard();
@@ -128,32 +125,5 @@ public class ChessBoard {
 	
 	public void printPossibleMoves(int row, int column) {
 		chessBoard[row][column].printPossibleMoves();
-	}
-	
-	private void cloneBoard() {
-		
-		for(int i = 0; i < 8; i++) {
-			for(int j = 0; j < 8; j++) {
-				if(chessBoard[i][j] == null) testingChessBoard[i][j] = null;
-				else {
-					if(chessBoard[i][j] instanceof Pawn) {if(!chessBoard[i][j].player) System.out.print("bp "); else System.out.print("wp ");}
-					else if(chessBoard[i][j] instanceof Rook) {if(!chessBoard[i][j].player) System.out.print("bR "); else System.out.print("wR ");}
-					else if(chessBoard[i][j] instanceof Knight) {if(!chessBoard[i][j].player) System.out.print("bN "); else System.out.print("wN ");}
-					else if(chessBoard[i][j] instanceof Bishop) {if(!chessBoard[i][j].player) System.out.print("bB "); else System.out.print("wB ");}
-					else if(chessBoard[i][j] instanceof Queen) {if(!chessBoard[i][j].player) System.out.print("bQ "); else System.out.print("wQ ");}
-					else if(chessBoard[i][j] instanceof King) {if(!chessBoard[i][j].player) System.out.print("bK "); else System.out.print("wK ");}
-				}
-			}
-		}
-	}
-	
-	public boolean isCheck() {
-		
-		return false;
-	}
-	
-	public boolean isCheckMate() {
-		
-		return false;
 	}
 }
