@@ -1,6 +1,5 @@
 package Pieces;
 
-import java.util.ArrayList;
 
 public abstract class Piece {
 
