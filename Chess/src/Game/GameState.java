@@ -7,23 +7,27 @@ import Pieces.Piece;
 public class GameState {
 	
 	private Piece[][] possibleChessBoard;
-	private ArrayList<Piece> blkPieces;
-	private ArrayList<Piece> whtPieces;
-	
+	private ArrayList<Piece> possibleBlkPieces;
+	private ArrayList<Piece> possibleWhtPieces;
 	
 	public GameState() {
 		
 		possibleChessBoard = new Piece[8][8];
-		blkPieces = new ArrayList<Piece>();
-		whtPieces = new ArrayList<Piece>();
+		possibleBlkPieces = new ArrayList<Piece>();
+		possibleWhtPieces = new ArrayList<Piece>();
 	}
 	
-	public boolean gameState() {
+	public boolean gameState(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
+		
+		cloneBoard(chessBoard, blkPieces, whtPieces);
 		
 		return false;
 	}
 	
-	private void cloneBoard() {
+	private void cloneBoard(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
+		
+		possibleBlkPieces.clear();
+		possibleWhtPieces.clear();
 		
 	}
 	
