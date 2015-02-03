@@ -122,8 +122,4 @@ public class ChessBoard {
 		
 		return blkKing;
 	}
-	
-	public void printPossibleMoves(int row, int column) {
-		chessBoard[row][column].printPossibleMoves();
-	}
 }
