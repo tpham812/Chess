@@ -4,17 +4,79 @@ import java.util.ArrayList;
 
 public class King extends Piece {
 
-	private ArrayList<Integer> possibleMoves;
-	
 	public King(boolean player, int row, int column) {
+		
 		super(player, row, column);
-		possibleMoves = new ArrayList<Integer>();
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void updatePossibleMoves(Piece[][] chessBoard) {
-		// TODO Auto-generated method stub
+
+		int newRow, newColumn;
+		Piece piece;
 		
+		newColumn = column + 1;
+		if(newColumn < 8) {
+			piece = chessBoard[row][newColumn];
+			if(piece == null || piece.player != player) {
+				moves[row][newColumn] = true;
+				possibleMoves.add(row * 10 + newColumn);
+			}
+		}
+		newColumn = column - 1;
+		if(newColumn >= 0) {
+			piece = chessBoard[row][newColumn];
+			if(piece == null || piece.player != player) {
+				moves[row][newColumn] = true;
+				possibleMoves.add(row * 10 + newColumn);
+			}
+		}
+		newRow = row + 1;
+		if(newRow < 8) {
+			piece = chessBoard[newRow][column];
+			if(piece == null || piece.player != player) {
+				moves[newRow][column] = true;
+				possibleMoves.add(newRow * 10 + column);
+			}
+			newColumn = column + 1;
+			if(newColumn < 8) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+			newColumn = column - 1;
+			if(newColumn >= 0) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+		}
+		newRow = row - 1;
+		if(newRow >= 0) {
+			piece = chessBoard[newRow][column];
+			if(piece == null || piece.player != player) {
+				moves[newRow][column] = true;
+				possibleMoves.add(newRow * 10 + column);
+			}
+			newColumn = column + 1;
+			if(newColumn < 8) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+			newColumn = column - 1;
+			if(newColumn >= 0) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+		}
 	}
 }

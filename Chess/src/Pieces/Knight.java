@@ -9,8 +9,7 @@ public class Knight extends Piece {
 
 	public void updatePossibleMoves(Piece[][] chessBoard) {
 
-		int newRow;
-		int newColumn;
+		int newRow, newColumn;
 		Piece piece;
 		
 		newRow = row + 2;
