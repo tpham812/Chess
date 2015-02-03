@@ -17,10 +17,4 @@ public class King extends Piece {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void updatePosition(int newRow, int newColumn) {
-	
-		row = newRow;
-		column = newColumn;
-	}
 }

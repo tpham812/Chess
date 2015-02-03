@@ -43,6 +43,11 @@ public abstract class Piece {
 		return moves[newRow][newColumn];
 	}
 	
+	public void updatePosition(int newRow, int newColumn) {
+		
+		row = newRow;
+		column = newColumn;
+	}
+	
 	public abstract void updatePossibleMoves(Piece[][] chessBoard);
-	public abstract void updatePosition(int newRow, int newColumn);
 }
