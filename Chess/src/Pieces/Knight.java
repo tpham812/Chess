@@ -12,6 +12,9 @@ public class Knight extends Piece {
 		int newRow, newColumn;
 		Piece piece;
 		
+		setMovesFalse();
+		possibleMoves.clear();
+		
 		newRow = row + 2;
 		if(newRow < 8) {
 			newColumn = column + 1;

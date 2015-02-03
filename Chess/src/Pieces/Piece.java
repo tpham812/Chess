@@ -28,6 +28,7 @@ public abstract class Piece {
 			}
 		}
 	}
+	
 	public void printPossibleMoves() {
 		
 		for(int i = 0; i < 8; i++) {

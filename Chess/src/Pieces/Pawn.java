@@ -20,6 +20,7 @@ public class Pawn extends Piece {
 
 		setMovesFalse();
 		possibleMoves.clear();
+		
 		justMoved2Ranks = false;
 		newRow = row + direction;
 		if(newRow >= 0 && newRow < 8) {

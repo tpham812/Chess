@@ -1,7 +1,5 @@
 package Pieces;
 
-import java.util.ArrayList;
-
 public class King extends Piece {
 
 	public King(boolean player, int row, int column) {
@@ -13,6 +11,9 @@ public class King extends Piece {
 
 		int newRow, newColumn;
 		Piece piece;
+		
+		setMovesFalse();
+		possibleMoves.clear();
 		
 		newColumn = column + 1;
 		if(newColumn < 8) {
