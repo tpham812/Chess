@@ -52,7 +52,7 @@ public class ChessGame {
 				System.out.print("\nDraw Game. No winner.\n");
 				break;
 			}
-			if(!badInput) 
+			if(!badInput) {
 				if(chessBoard.isPieceAtLocation(row, column)) {
 					if(isPlayerPiece()) {
 						if(isValidMove()) {
@@ -68,6 +68,7 @@ public class ChessGame {
 				}
 				else 
 					System.out.print("\nNo piece at that locaton. Try again.\n");
+			}
 			else 
 				System.out.print("\nBad input. Try again.\n");
 		}
