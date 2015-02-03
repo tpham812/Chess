@@ -23,9 +23,8 @@ public class Bishop extends Piece {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
 			}
-			else {
+			else 
 				break;
-			}
 			newRow--;
 			newColumn--;
 		}
@@ -37,9 +36,8 @@ public class Bishop extends Piece {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
 			}
-			else {
+			else
 				break;
-			}
 			newRow--;
 			newColumn++;
 		}
@@ -51,9 +49,8 @@ public class Bishop extends Piece {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
 			}
-			else {
+			else
 				break;
-			}
 			newRow++;
 			newColumn--;
 		}
@@ -65,9 +62,8 @@ public class Bishop extends Piece {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
 			}
-			else {
+			else
 				break;
-			}
 			newRow++;
 			newColumn++;
 		}
