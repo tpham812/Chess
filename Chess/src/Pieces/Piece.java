@@ -1,5 +1,7 @@
 package Pieces;
 
+import java.util.ArrayList;
+
 
 public abstract class Piece {
 
@@ -7,6 +9,7 @@ public abstract class Piece {
 	public int row;
 	public int column;
 	protected boolean[][] moves;
+	protected ArrayList<Integer> possibleMoves;
 	
 	public Piece(boolean player, int row, int column) {
 		
@@ -14,6 +17,7 @@ public abstract class Piece {
 		this.row = row;
 		this.column = column;
 		moves= new boolean[8][8];
+		possibleMoves = new ArrayList<Integer>();
 	}
 	
 	protected void setMovesFalse() {

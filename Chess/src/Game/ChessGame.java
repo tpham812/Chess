@@ -43,7 +43,11 @@ public class ChessGame {
 			else 
 				System.out.print("\nBlack's Move: ");
 			String input = br.readLine();
+			if(input.trim().equals(""))
+				continue;
 			parsePlayerInput(input);
+			if(!isValidRowAndColumn()) 
+				badInput = true;
 			if(draw) {
 				System.out.print("\nDraw Game. No winner.\n");
 				break;
@@ -101,6 +105,11 @@ public class ChessGame {
 			else 
 				badInput = true;
 		}
+	}
+	
+	private static boolean isValidRowAndColumn () {
+		
+		return row >= 0 && row < 8 && newRow >= 0 && newRow < 8 && column >= 0 && column < 8 && newColumn >= 0 && newColumn < 8;
 	}
 	
 	private static boolean isValidMove() {

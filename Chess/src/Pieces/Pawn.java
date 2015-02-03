@@ -19,7 +19,7 @@ public class Pawn extends Piece {
 		Piece piece, piece2;
 
 		setMovesFalse();
-		
+		possibleMoves.clear();
 		justMoved2Ranks = false;
 		newRow = row + direction;
 		if(newRow >= 0 && newRow < 8) {
@@ -28,32 +28,44 @@ public class Pawn extends Piece {
 				piece = chessBoard[newRow][newColumn];
 				piece2 = chessBoard[row][newColumn];
 				if(piece == null && piece2 != null && piece2.player != player) {
-					if(piece2 instanceof Pawn &&  ((Pawn)piece2).justMoved2Ranks == true && ((Pawn)piece2).firstMove == true) 
-						moves[newRow][newColumn] = true;
+					enPassant(piece2, newRow, newColumn);
 				}
-				else if(piece != null && piece.player != player )
+				else if(piece != null && piece.player != player ) {
 					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
 			}
 			newColumn = column + 1;
 			if(newColumn < 8  ) {
 				piece = chessBoard[newRow][newColumn];
 				piece2 = chessBoard[row][newColumn];
 				if(piece == null && piece2 != null && piece2.player != player) {
-					if(piece2 instanceof Pawn && ((Pawn)piece2).justMoved2Ranks == true && ((Pawn)piece2).firstMove == true) 
-						moves[newRow][newColumn] = true;
+					enPassant(piece2, newRow, newColumn);
 				}
-				else if(piece != null && piece.player != player)
+				else if(piece != null && piece.player != player) {
 					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
 			}
 			if(chessBoard[newRow][column] == null) {
 				moves[newRow][column] = true;
+				possibleMoves.add(newRow * 10 + column);
 				if(!firstMove) {
 					newRow = row + (direction * 2);
 					if(chessBoard[newRow][column] == null) {
 						moves[newRow][column] = true;
+						possibleMoves.add(newRow * 10 + column);
 					}
 				}
 			}
+		}
+	}
+	
+	private void enPassant(Piece piece, int newRow, int newColumn) {
+		
+		if(piece instanceof Pawn && ((Pawn)piece).justMoved2Ranks == true && ((Pawn)piece).firstMove == true) {
+			moves[newRow][newColumn] = true;
+			possibleMoves.add(newRow * 10 + newColumn);
 		}
 	}
 	
