@@ -18,44 +18,64 @@ public class Rook extends Piece {
 		newColumn = column + 1;
 		while(newColumn < 8) {
 			piece = chessBoard[row][newColumn];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[row][newColumn] = true;
 				possibleMoves.add(row * 10 + newColumn);
 			}
-			else 
+			else if(piece.player != player) {
+				moves[row][newColumn] = true;
+				possibleMoves.add(row * 10 + newColumn);
+				break;
+			}
+			else
 				break;
 			newColumn++;
 		}
 		newColumn = column - 1;
 		while(newColumn >= 0) {
 			piece = chessBoard[row][newColumn];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[row][newColumn] = true;
 				possibleMoves.add(row * 10 + newColumn);
 			}
-			else 
+			else if(piece.player != player) {
+				moves[row][newColumn] = true;
+				possibleMoves.add(row * 10 + newColumn);
+				break;
+			}
+			else
 				break;
 			newColumn--;
 		}
 		newRow = row + 1;
 		while(newRow < 8) {
 			piece = chessBoard[newRow][column];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[newRow][column] = true;
 				possibleMoves.add(newRow * 10 + column);
 			}
-			else 
+			else if(piece.player != player) {
+				moves[newRow][column] = true;
+				possibleMoves.add(newRow * 10 + column);
+				break;
+			}
+			else
 				break;
 			newRow++;
 		}
 		newRow = row - 1;
 		while(newRow >= 0) {
 			piece = chessBoard[newRow][column];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[newRow][column] = true;
 				possibleMoves.add(newRow * 10 + column);
 			}
-			else 
+			else if(piece.player != player) {
+				moves[newRow][column] = true;
+				possibleMoves.add(newRow * 10 + column);
+				break;
+			}
+			else
 				break;
 			newRow--;
 		}

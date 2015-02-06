@@ -19,11 +19,16 @@ public class Bishop extends Piece {
 		newColumn = column - 1;
 		while(newRow >= 0 && newColumn >= 0) {
 			piece = chessBoard[newRow][newColumn];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
 			}
-			else 
+			else if(piece.player != player) {
+				moves[newRow][newColumn] = true;
+				possibleMoves.add(newRow * 10 + newColumn);
+				break;
+			}
+			else
 				break;
 			newRow--;
 			newColumn--;
@@ -32,9 +37,14 @@ public class Bishop extends Piece {
 		newColumn = column + 1;
 		while(newRow >= 0 && newColumn < 8) {
 			piece = chessBoard[newRow][newColumn];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
+			}
+			else if(piece.player != player) {
+				moves[newRow][newColumn] = true;
+				possibleMoves.add(newRow * 10 + newColumn);
+				break;
 			}
 			else
 				break;
@@ -45,9 +55,14 @@ public class Bishop extends Piece {
 		newColumn = column - 1;
 		while(newRow < 8 && newColumn >= 0) {
 			piece = chessBoard[newRow][newColumn];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
+			}
+			else if(piece.player != player) {
+				moves[newRow][newColumn] = true;
+				possibleMoves.add(newRow * 10 + newColumn);
+				break;
 			}
 			else
 				break;
@@ -58,9 +73,14 @@ public class Bishop extends Piece {
 		newColumn = column + 1;
 		while(newRow < 8 && newColumn < 8) {
 			piece = chessBoard[newRow][newColumn];
-			if(piece == null || piece.player != player) {
+			if(piece == null) {
 				moves[newRow][newColumn] = true;
 				possibleMoves.add(newRow * 10 + newColumn);
+			}
+			else if(piece.player != player) {
+				moves[newRow][newColumn] = true;
+				possibleMoves.add(newRow * 10 + newColumn);
+				break;
 			}
 			else
 				break;
