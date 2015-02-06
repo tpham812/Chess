@@ -17,7 +17,7 @@ public class GameState {
 		possibleWhtPieces = new ArrayList<Piece>();
 	}
 	
-	public boolean gameState(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
+	public boolean getGameState(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
 		
 		cloneBoard(chessBoard, blkPieces, whtPieces);
 		
