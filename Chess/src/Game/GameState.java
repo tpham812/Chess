@@ -2,19 +2,16 @@ package Game;
 
 import java.util.ArrayList;
 
+import Board.ChessBoard;
 import Pieces.Piece;
 
 public class GameState {
 	
-	private Piece[][] possibleChessBoard;
-	private ArrayList<Piece> possibleBlkPieces;
-	private ArrayList<Piece> possibleWhtPieces;
+	private ChessBoard chessBoard;
 	
 	public GameState() {
 		
-		possibleChessBoard = new Piece[8][8];
-		possibleBlkPieces = new ArrayList<Piece>();
-		possibleWhtPieces = new ArrayList<Piece>();
+		chessBoard = new ChessBoard();
 	}
 	
 	public boolean getGameState(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
@@ -26,8 +23,7 @@ public class GameState {
 	
 	private void cloneBoard(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
 		
-		possibleBlkPieces.clear();
-		possibleWhtPieces.clear();
+		
 	}
 	
 	private boolean isCheck() {

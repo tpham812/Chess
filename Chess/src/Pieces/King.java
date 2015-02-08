@@ -2,9 +2,12 @@ package Pieces;
 
 public class King extends Piece {
 
+	private boolean firstMove;
+	
 	public King(boolean player, int row, int column) {
 		
 		super(player, row, column);
+		firstMove = false;
 	}
 
 	public void updatePossibleMoves(Piece[][] chessBoard) {
@@ -79,5 +82,86 @@ public class King extends Piece {
 				}
 			}
 		}
+		if(!firstMove)
+			castling(chessBoard);
+	}
+	
+	private void castling(Piece[][] chessBoard) {
+		
+		if(player) {
+			Piece piece = chessBoard[7][0];
+			if(piece != null && piece instanceof Rook) {
+				boolean check = true;
+				int i = 1;
+				while(i < 4) {
+					if(chessBoard[7][i] != null) {
+						check = false;
+						break;
+					}
+					i++;
+				}
+				if(check) {
+					moves[7][2] = true;
+					possibleMoves.add(72);
+				}
+			}
+			piece = chessBoard[7][7];
+			if(piece != null && piece instanceof Rook) {
+				boolean check = true;
+				int i = 6;
+				while(i > 4) {
+					if(chessBoard[7][i] != null) {
+						check = false;
+						break;
+					}
+					i--;
+				}
+				if(check) {
+					moves[7][6] = true;
+					possibleMoves.add(76);
+				}
+			}
+		}
+		else {
+			Piece piece = chessBoard[0][0];
+			if(piece != null && piece instanceof Rook) {
+				boolean check = true;
+				int i = 1;
+				while(i < 4) {
+					if(chessBoard[0][i] != null) {
+						check = false;
+						break;
+					}
+					i++;
+				}
+				if(check) {
+					moves[0][2] = true;
+					possibleMoves.add(2);
+				}
+			}
+			piece = chessBoard[0][7];
+			if(piece != null && piece instanceof Rook) {
+				boolean check = true;
+				int i = 6;
+				while(i > 4) {
+					if(chessBoard[0][i] != null) {
+						check = false;
+						break;
+					}
+					i--;
+				}
+				if(check) {
+					moves[0][6] = true;
+					possibleMoves.add(6);
+				}
+			}
+		}
+	}
+	
+	public void updatePosition(int newRow, int newColumn) {
+		
+		firstMove = true;
+		row = newRow;
+		column = newColumn;
 	}
 }

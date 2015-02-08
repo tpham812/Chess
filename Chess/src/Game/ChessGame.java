@@ -26,6 +26,7 @@ public class ChessGame {
 		
 		br = new BufferedReader(new InputStreamReader(System.in));
 		chessBoard = new ChessBoard();
+		chessBoard.initialize();
 		checkMate = false;
 		draw = false;
 		player = true;
