@@ -103,7 +103,7 @@ public class ChessBoard {
 			}
 			else {
 				chessBoard[row][column - 1] = chessBoard[row][newColumn - 2];
-				chessBoard[row][newColumn -2 ] = null;
+				chessBoard[row][newColumn - 2 ] = null;
 			}
 		}
 		chessBoard[newRow][newColumn] = piece;
@@ -137,5 +137,10 @@ public class ChessBoard {
 	private boolean isCastlingMove(Piece piece, int column, int newColumn) {
 		
 		return piece instanceof King && Math.abs(newColumn - column) == 2;
+	}
+	
+	private boolean isPromoition(Piece piece, int newRow) {
+		
+		return false;
 	}
 }
