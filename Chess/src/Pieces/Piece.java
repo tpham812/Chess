@@ -29,6 +29,17 @@ public abstract class Piece {
 		}
 	}
 	
+	protected void resetMovesFalse() {
+		
+		int num, row, column; 
+		for(int i = 0; i < possibleMoves.size(); i++) {
+			num = possibleMoves.get(i);
+			row = num / 10;
+			column = num % 10;
+			moves[row][column] = false;
+		}
+	}
+	
 	public boolean isVaildMove(int newRow, int newColumn) {
 		
 		return moves[newRow][newColumn];

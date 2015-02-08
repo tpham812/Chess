@@ -5,6 +5,7 @@ public class Knight extends Piece {
 	public Knight(boolean player, int row, int column) {
 		
 		super(player, row, column);
+		setMovesFalse();
 	}
 
 	public void updatePossibleMoves(Piece[][] chessBoard) {
@@ -12,7 +13,7 @@ public class Knight extends Piece {
 		int newRow, newColumn;
 		Piece piece;
 		
-		setMovesFalse();
+		resetMovesFalse();
 		possibleMoves.clear();
 		
 		newRow = row + 2;

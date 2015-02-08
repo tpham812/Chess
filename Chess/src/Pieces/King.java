@@ -7,6 +7,7 @@ public class King extends Piece {
 	public King(boolean player, int row, int column) {
 		
 		super(player, row, column);
+		setMovesFalse();
 		firstMove = false;
 	}
 
@@ -15,7 +16,7 @@ public class King extends Piece {
 		int newRow, newColumn;
 		Piece piece;
 		
-		setMovesFalse();
+		resetMovesFalse();
 		possibleMoves.clear();
 		
 		newColumn = column + 1;

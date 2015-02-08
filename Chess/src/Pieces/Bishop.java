@@ -5,6 +5,7 @@ public class Bishop extends Piece {
 	public Bishop(boolean player, int row, int column) {
 		
 		super(player, row, column);
+		setMovesFalse();
 	}
 
 	public void updatePossibleMoves(Piece[][] chessBoard) {
@@ -12,7 +13,7 @@ public class Bishop extends Piece {
 		int newRow, newColumn;
 		Piece piece;
 		
-		setMovesFalse();
+		resetMovesFalse();
 		possibleMoves.clear();
 		
 		newRow = row - 1;

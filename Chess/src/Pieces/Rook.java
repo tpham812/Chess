@@ -8,6 +8,7 @@ public class Rook extends Piece {
 	public Rook(boolean player, int row, int column) {
 		
 		super(player, row, column);
+		setMovesFalse();
 		firstMove = false;
 	}
 	
@@ -16,7 +17,7 @@ public class Rook extends Piece {
 		int newRow, newColumn;
 		Piece piece;
 		
-		setMovesFalse();
+		resetMovesFalse();
 		possibleMoves.clear();
 		
 		newColumn = column + 1;

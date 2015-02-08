@@ -9,6 +9,7 @@ public class Pawn extends Piece {
 	public Pawn(boolean player, int row, int column, int direction) {
 		
 		super(player, row, column);
+		setMovesFalse();
 		firstMove = false;
 		this.direction = direction;
 	}
@@ -18,7 +19,7 @@ public class Pawn extends Piece {
 		int newRow, newColumn; 
 		Piece piece, piece2;
 
-		setMovesFalse();
+		resetMovesFalse();
 		possibleMoves.clear();
 		
 		justMoved2Ranks = false;
