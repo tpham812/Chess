@@ -2,9 +2,13 @@ package Pieces;
 
 public class Rook extends Piece {
 
+
+	public boolean firstMove;
+	
 	public Rook(boolean player, int row, int column) {
 		
 		super(player, row, column);
+		firstMove = false;
 	}
 	
 	public void updatePossibleMoves(Piece[][] chessBoard) {
@@ -79,5 +83,12 @@ public class Rook extends Piece {
 				break;
 			newRow--;
 		}
+	}
+	
+	public void updatePosition(int newRow, int newColumn) {
+		
+		firstMove = true;
+		row = newRow;
+		column = newColumn;
 	}
 }

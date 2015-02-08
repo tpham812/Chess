@@ -14,14 +14,14 @@ public class GameState {
 		chessBoard = new ChessBoard();
 	}
 	
-	public boolean getGameState(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
+	public boolean getGameState(ChessBoard chessBoard, boolean player) {
 		
-		cloneBoard(chessBoard, blkPieces, whtPieces);
+		cloneBoard(chessBoard, player);
 		
 		return false;
 	}
 	
-	private void cloneBoard(Piece[][] chessBoard, ArrayList<Piece> blkPieces, ArrayList<Piece> whtPieces) {
+	private void cloneBoard(ChessBoard chessBoard, boolean player) {
 		
 		
 	}

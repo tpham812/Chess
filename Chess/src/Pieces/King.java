@@ -88,72 +88,36 @@ public class King extends Piece {
 	
 	private void castling(Piece[][] chessBoard) {
 		
-		if(player) {
-			Piece piece = chessBoard[7][0];
-			if(piece != null && piece instanceof Rook) {
-				boolean check = true;
-				int i = 1;
-				while(i < 4) {
-					if(chessBoard[7][i] != null) {
-						check = false;
-						break;
-					}
-					i++;
+		Piece piece = chessBoard[row][0];
+		if(piece != null && piece instanceof Rook && !((Rook)piece).firstMove) {
+			boolean check = true;
+			int i = 1;
+			while(i < 4) {
+				if(chessBoard[row][i] != null) {
+					check = false;
+					break;
 				}
-				if(check) {
-					moves[7][2] = true;
-					possibleMoves.add(72);
-				}
+				i++;
 			}
-			piece = chessBoard[7][7];
-			if(piece != null && piece instanceof Rook) {
-				boolean check = true;
-				int i = 6;
-				while(i > 4) {
-					if(chessBoard[7][i] != null) {
-						check = false;
-						break;
-					}
-					i--;
-				}
-				if(check) {
-					moves[7][6] = true;
-					possibleMoves.add(76);
-				}
+			if(check) {
+				moves[row][2] = true;
+				possibleMoves.add(row * 10 + 2);
 			}
 		}
-		else {
-			Piece piece = chessBoard[0][0];
-			if(piece != null && piece instanceof Rook) {
-				boolean check = true;
-				int i = 1;
-				while(i < 4) {
-					if(chessBoard[0][i] != null) {
-						check = false;
-						break;
-					}
-					i++;
+		piece = chessBoard[row][7];
+		if(piece != null & piece instanceof Rook && !((Rook)piece).firstMove) {
+			boolean check = true;
+			int i = 6;
+			while(i > 4) {
+				if(chessBoard[row][i] != null) {
+					check = false;
+					break;
 				}
-				if(check) {
-					moves[0][2] = true;
-					possibleMoves.add(2);
-				}
+				i--;
 			}
-			piece = chessBoard[0][7];
-			if(piece != null && piece instanceof Rook) {
-				boolean check = true;
-				int i = 6;
-				while(i > 4) {
-					if(chessBoard[0][i] != null) {
-						check = false;
-						break;
-					}
-					i--;
-				}
-				if(check) {
-					moves[0][6] = true;
-					possibleMoves.add(6);
-				}
+			if(check) {
+				moves[row][6] = true;
+				possibleMoves.add(row * 10 + 6);
 			}
 		}
 	}
