@@ -111,16 +111,6 @@ public class ChessBoard {
 		piece.updatePosition(newRow, newColumn);
 	}
 	
-	private boolean isEnPassantMove(Piece piece, int newRow, int newColumn) {
-		
-		return piece instanceof Pawn && chessBoard[newRow][newColumn] == null;
-	}
-	
-	private boolean isCastlingMove(Piece piece, int column, int newColumn) {
-		
-		return piece instanceof King && Math.abs(newColumn - column) == 2;
-	}
-	
 	public boolean isPieceAtLocation(int row, int column) {
 		
 		if(chessBoard[row][column] != null)
@@ -137,5 +127,15 @@ public class ChessBoard {
 	public Piece[][] getChessBoard() {
 		
 		return chessBoard;
+	}
+	
+	private boolean isEnPassantMove(Piece piece, int newRow, int newColumn) {
+		
+		return piece instanceof Pawn && chessBoard[newRow][newColumn] == null;
+	}
+	
+	private boolean isCastlingMove(Piece piece, int column, int newColumn) {
+		
+		return piece instanceof King && Math.abs(newColumn - column) == 2;
 	}
 }
