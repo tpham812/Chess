@@ -94,11 +94,31 @@ public class ChessBoard {
 	public void movePiece(int row, int column, int newRow, int newColumn) {
 		
 		Piece piece = chessBoard[row][column];
-		if(piece instanceof Pawn && chessBoard[newRow][newColumn] == null) 
+		if(isEnPassantMove(piece, newRow, newColumn)) 
 			chessBoard[row][newColumn] = null;
+		else if(isCastlingMove(piece, column, newColumn)) {
+			if(newColumn - column == 2) {
+				chessBoard[row][column + 1] = chessBoard[row][newColumn + 1];
+				chessBoard[row][newColumn + 1] = null;
+			}
+			else {
+				chessBoard[row][column - 1] = chessBoard[row][newColumn - 2];
+				chessBoard[row][newColumn -2 ] = null;
+			}
+		}
 		chessBoard[newRow][newColumn] = piece;
 		chessBoard[row][column] = null;
 		piece.updatePosition(newRow, newColumn);
+	}
+	
+	private boolean isEnPassantMove(Piece piece, int newRow, int newColumn) {
+		
+		return piece instanceof Pawn && chessBoard[newRow][newColumn] == null;
+	}
+	
+	private boolean isCastlingMove(Piece piece, int column, int newColumn) {
+		
+		return piece instanceof King && Math.abs(newColumn - column) == 2;
 	}
 	
 	public boolean isPieceAtLocation(int row, int column) {
