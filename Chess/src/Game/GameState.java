@@ -1,9 +1,6 @@
 package Game;
 
-import java.util.ArrayList;
-
 import Board.ChessBoard;
-import Pieces.Piece;
 
 public class GameState {
 	
