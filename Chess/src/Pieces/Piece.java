@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Piece {
 
-	public boolean player;
+	protected boolean player;
 	protected int row;
 	protected int column;
 	protected boolean[][] moves;
@@ -49,6 +49,27 @@ public abstract class Piece {
 		
 		row = newRow;
 		column = newColumn;
+	}
+
+	
+	public ArrayList<Integer> getPossibleMoves() {
+		
+		return possibleMoves;
+	}
+	
+	public boolean getPlayer() {
+	
+		return player;
+	}
+	
+	public int getRow() {
+		
+		return row;
+	}
+	
+	public int getColumn() {
+		
+		return column;
 	}
 	
 	public abstract void updatePossibleMoves(Piece[][] chessBoard);

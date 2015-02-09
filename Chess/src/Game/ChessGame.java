@@ -128,6 +128,6 @@ public class ChessGame {
 	private static boolean isPlayerPiece() {
 		
 		Piece piece = chessBoard.getPiece(row, column);
-		return piece.player == player;
+		return piece.getPlayer() == player;
 	}
 }

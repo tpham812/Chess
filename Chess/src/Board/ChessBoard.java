@@ -62,12 +62,12 @@ public class ChessBoard {
 				if(i == 8) {System.out.print(" " + alpha + " "); num = num + 1; alpha = (char)num;}
 				else if(j == 8) {System.out.print(num2--);}
 				else if(chessBoard[i][j] != null) {
-					if(chessBoard[i][j] instanceof Pawn) {if(!chessBoard[i][j].player) System.out.print("bp "); else System.out.print("wp ");}
-					else if(chessBoard[i][j] instanceof Rook) {if(!chessBoard[i][j].player) System.out.print("bR "); else System.out.print("wR ");}
-					else if(chessBoard[i][j] instanceof Knight) {if(!chessBoard[i][j].player) System.out.print("bN "); else System.out.print("wN ");}
-					else if(chessBoard[i][j] instanceof Bishop) {if(!chessBoard[i][j].player) System.out.print("bB "); else System.out.print("wB ");}
-					else if(chessBoard[i][j] instanceof Queen) {if(!chessBoard[i][j].player) System.out.print("bQ "); else System.out.print("wQ ");}
-					else if(chessBoard[i][j] instanceof King) {if(!chessBoard[i][j].player) System.out.print("bK "); else System.out.print("wK ");}
+					if(chessBoard[i][j] instanceof Pawn) {if(!chessBoard[i][j].getPlayer()) System.out.print("bp "); else System.out.print("wp ");}
+					else if(chessBoard[i][j] instanceof Rook) {if(!chessBoard[i][j].getPlayer()) System.out.print("bR "); else System.out.print("wR ");}
+					else if(chessBoard[i][j] instanceof Knight) {if(!chessBoard[i][j].getPlayer()) System.out.print("bN "); else System.out.print("wN ");}
+					else if(chessBoard[i][j] instanceof Bishop) {if(!chessBoard[i][j].getPlayer()) System.out.print("bB "); else System.out.print("wB ");}
+					else if(chessBoard[i][j] instanceof Queen) {if(!chessBoard[i][j].getPlayer()) System.out.print("bQ "); else System.out.print("wQ ");}
+					else if(chessBoard[i][j] instanceof King) {if(!chessBoard[i][j].getPlayer()) System.out.print("bK "); else System.out.print("wK ");}
 				}
 				else {
 					if(i % 2 == 0) {
@@ -103,11 +103,11 @@ public class ChessBoard {
 			castling(row, column, newColumn);
 		}
 		else if(isPromotion(piece, newRow)) {
-			removePieceFromCollections(piece.player, piece);
+			removePieceFromCollections(piece.getPlayer(), piece);
 			piece = promotion(piece, promoChoice, row, column);
 		}	
 		if(targetPiece != null) {
-			removePieceFromCollections(targetPiece.player, targetPiece);
+			removePieceFromCollections(targetPiece.getPlayer(), targetPiece);
 		}
 		chessBoard[newRow][newColumn] = piece;
 		chessBoard[row][column] = null;
@@ -135,7 +135,7 @@ public class ChessBoard {
 	private void enPassant(int row, int newColumn) {
 		
 		Piece piece = chessBoard[row][newColumn];
-		removePieceFromCollections(piece.player, piece);
+		removePieceFromCollections(piece.getPlayer(), piece);
 		chessBoard[row][newColumn] = null;
 	}
 	
@@ -153,7 +153,7 @@ public class ChessBoard {
 	
 	private Piece promotion(Piece piece, char promoChoice, int row, int column) {
 		
-		boolean player = piece.player;
+		boolean player = piece.getPlayer();
 		
 		if(promoChoice == '0' || promoChoice == 'Q') { 
 			Queen queen = new Queen(player, row, column);
