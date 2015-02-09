@@ -103,6 +103,7 @@ public class ChessBoard {
 			castling(row, column, newColumn);
 		}
 		else if(isPromotion(piece, newRow)) {
+			removePieceFromCollections(piece.player, piece);
 			piece = promotion(piece, promoChoice, row, column);
 		}	
 		if(targetPiece != null) {
@@ -130,7 +131,6 @@ public class ChessBoard {
 		
 		return chessBoard;
 	}
-	
 	
 	private void enPassant(int row, int newColumn) {
 		
