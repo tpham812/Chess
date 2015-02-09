@@ -91,23 +91,20 @@ public class ChessBoard {
 		}
 	}
 	
-	public void movePiece(int row, int column, int newRow, int newColumn) {
+	public void movePiece(int row, int column, int newRow, int newColumn, char promoChoice) {
 		
 		Piece piece = chessBoard[row][column];
-		if(isEnPassantMove(piece, newRow, newColumn)) 
-			chessBoard[row][newColumn] = null;
+		if(isEnPassantMove(piece, newRow, newColumn)) {
+			enPassant(row, newColumn);
+		}
 		else if(isCastlingMove(piece, column, newColumn)) {
-			if(newColumn - column == 2) {
-				chessBoard[row][column + 1] = chessBoard[row][newColumn + 1];
-				chessBoard[row][newColumn + 1] = null;
-			}
-			else {
-				chessBoard[row][column - 1] = chessBoard[row][newColumn - 2];
-				chessBoard[row][newColumn - 2 ] = null;
-			}
+			castling(row, column, newColumn);
 		}
 		chessBoard[newRow][newColumn] = piece;
 		chessBoard[row][column] = null;
+		if(isPromotion(piece, newRow)) {
+			promotion(promoChoice, newRow, newColumn);
+		}
 		piece.updatePosition(newRow, newColumn);
 	}
 	
@@ -129,6 +126,39 @@ public class ChessBoard {
 		return chessBoard;
 	}
 	
+	
+	private void enPassant(int row, int newColumn) {
+		
+		chessBoard[row][newColumn] = null;
+	}
+	
+	private void castling(int row, int column, int newColumn) {
+		
+		if(newColumn - column == 2) {
+			chessBoard[row][column + 1] = chessBoard[row][newColumn + 1];
+			chessBoard[row][newColumn + 1] = null;
+		}
+		else {
+			chessBoard[row][column - 1] = chessBoard[row][newColumn - 2];
+			chessBoard[row][newColumn - 2 ] = null;
+		}
+	}
+	
+	private void promotion(char promoChoice, int newRow, int newColumn) {
+		
+		boolean player = chessBoard[newRow][newColumn].player;
+		
+		if(promoChoice == '0' || promoChoice == 'Q') 
+			chessBoard[newRow][newColumn] = new Queen(player, newRow, newColumn);
+		else if(promoChoice == 'N') 
+			chessBoard[newRow][newColumn] = new Knight(player, newRow, newColumn);
+		else if(promoChoice == 'R') 
+			chessBoard[newRow][newColumn] = new Rook(player, newRow, newColumn);
+		else 
+			chessBoard[newRow][newColumn] = new Bishop(player, newRow, newColumn);
+	}
+	
+	
 	private boolean isEnPassantMove(Piece piece, int newRow, int newColumn) {
 		
 		return piece instanceof Pawn && chessBoard[newRow][newColumn] == null;
@@ -139,8 +169,8 @@ public class ChessBoard {
 		return piece instanceof King && Math.abs(newColumn - column) == 2;
 	}
 	
-	private boolean isPromoition(Piece piece, int newRow) {
+	private boolean isPromotion(Piece piece, int newRow) {
 		
-		return false;
+		return piece instanceof Pawn && newRow % 7 == 0;
 	}
 }

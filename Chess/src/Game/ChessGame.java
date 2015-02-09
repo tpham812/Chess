@@ -20,6 +20,7 @@ public class ChessGame {
 	private static int column;
 	private static int newRow;
 	private static int newColumn;
+	private static char promoChoice;
 	private static BufferedReader br; 
 	
 	public static void main(String[] args) throws IOException {
@@ -30,6 +31,7 @@ public class ChessGame {
 		checkMate = false;
 		draw = false;
 		player = true;
+		promoChoice = 0;
 		startGame();
 	}
 	
@@ -57,7 +59,7 @@ public class ChessGame {
 				if(chessBoard.isPieceAtLocation(row, column)) {
 					if(isPlayerPiece()) {
 						if(isValidMove()) {
-							chessBoard.movePiece(row, column, newRow, newColumn);
+							chessBoard.movePiece(row, column, newRow, newColumn, promoChoice);
 							chessBoard.updatePossibleMoves(!player);
 							player = !player;
 						}
