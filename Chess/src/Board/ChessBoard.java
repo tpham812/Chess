@@ -105,8 +105,9 @@ public class ChessBoard {
 		else if(isPromotion(piece, newRow)) {
 			piece = promotion(piece, promoChoice, row, column);
 		}	
-		if(targetPiece != null)
+		if(targetPiece != null) {
 			removePieceFromCollections(targetPiece.player, targetPiece);
+		}
 		chessBoard[newRow][newColumn] = piece;
 		chessBoard[row][column] = null;
 		piece.updatePosition(newRow, newColumn);
