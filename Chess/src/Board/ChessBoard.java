@@ -7,7 +7,7 @@ import Pieces.*;
 public class ChessBoard {
 
 	private static Piece[][] chessBoard;				
-	public static ArrayList<Piece> blkPieces;			
+	private static ArrayList<Piece> blkPieces;			
 	private static ArrayList<Piece> whtPieces;	
 	
 	public ChessBoard() {
