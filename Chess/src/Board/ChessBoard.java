@@ -7,8 +7,8 @@ import Pieces.*;
 public class ChessBoard {
 
 	private static Piece[][] chessBoard;				
-	private static ArrayList<Piece> blkPieces;			
-	private static ArrayList<Piece> whtPieces;			
+	public static ArrayList<Piece> blkPieces;			
+	private static ArrayList<Piece> whtPieces;	
 	
 	public ChessBoard() {
 		
@@ -94,17 +94,21 @@ public class ChessBoard {
 	public void movePiece(int row, int column, int newRow, int newColumn, char promoChoice) {
 		
 		Piece piece = chessBoard[row][column];
-		if(isEnPassantMove(piece, newRow, newColumn)) {
+		Piece targetPiece = chessBoard[newRow][newColumn];
+		
+		if(isEnPassantMove(piece, row, column, newColumn)) {
 			enPassant(row, newColumn);
 		}
 		else if(isCastlingMove(piece, column, newColumn)) {
 			castling(row, column, newColumn);
 		}
+		else if(isPromotion(piece, newRow)) {
+			piece = promotion(piece, promoChoice, row, column);
+		}	
+		if(targetPiece != null)
+			removePieceFromCollections(targetPiece.player, targetPiece);
 		chessBoard[newRow][newColumn] = piece;
 		chessBoard[row][column] = null;
-		if(isPromotion(piece, newRow)) {
-			promotion(promoChoice, newRow, newColumn);
-		}
 		piece.updatePosition(newRow, newColumn);
 	}
 	
@@ -144,24 +148,36 @@ public class ChessBoard {
 		}
 	}
 	
-	private void promotion(char promoChoice, int newRow, int newColumn) {
+	private Piece promotion(Piece piece, char promoChoice, int row, int column) {
 		
-		boolean player = chessBoard[newRow][newColumn].player;
+		boolean player = piece.player;
 		
-		if(promoChoice == '0' || promoChoice == 'Q') 
-			chessBoard[newRow][newColumn] = new Queen(player, newRow, newColumn);
-		else if(promoChoice == 'N') 
-			chessBoard[newRow][newColumn] = new Knight(player, newRow, newColumn);
-		else if(promoChoice == 'R') 
-			chessBoard[newRow][newColumn] = new Rook(player, newRow, newColumn);
-		else 
-			chessBoard[newRow][newColumn] = new Bishop(player, newRow, newColumn);
+		if(promoChoice == '0' || promoChoice == 'Q') { 
+			Queen queen = new Queen(player, row, column);
+			addPieceToCollections(player, queen);
+			return queen;
+		}
+		else if(promoChoice == 'N') {
+			Knight knight =  new Knight(player, row, column);
+			addPieceToCollections(player, knight);
+			return knight;
+		}
+		else if(promoChoice == 'R') {
+			Rook rook = new Rook(player, row, column);
+			addPieceToCollections(player, rook);
+			return rook;
+		}
+		else {
+			Bishop bishop = new Bishop(player, row, column);
+			addPieceToCollections(player, bishop);
+			return bishop;
+		}
 	}
 	
-	
-	private boolean isEnPassantMove(Piece piece, int newRow, int newColumn) {
+	private boolean isEnPassantMove(Piece piece, int row, int column, int newColumn) {
 		
-		return piece instanceof Pawn && chessBoard[newRow][newColumn] == null;
+		Piece testingPiece = chessBoard[row][newColumn];
+		return piece instanceof Pawn && Math.abs(column - newColumn) == 1 && testingPiece != null && testingPiece instanceof Pawn;
 	}
 	
 	private boolean isCastlingMove(Piece piece, int column, int newColumn) {
@@ -170,7 +186,26 @@ public class ChessBoard {
 	}
 	
 	private boolean isPromotion(Piece piece, int newRow) {
-		
+	
 		return piece instanceof Pawn && newRow % 7 == 0;
+	}
+	
+	private void addPieceToCollections(boolean player, Piece piece) {
+		
+		if(player) {
+			whtPieces.add(piece);
+		}
+		else {
+			blkPieces.add(piece);
+		}
+	}
+	private void removePieceFromCollections(boolean player, Piece piece) {
+		
+		if(player) {
+			whtPieces.remove(piece);
+		}
+		else {
+			blkPieces.remove(piece);
+		}
 	}
 }

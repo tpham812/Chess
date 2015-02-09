@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public abstract class Piece {
 
 	public boolean player;
-	public int row;
-	public int column;
+	protected int row;
+	protected int column;
 	protected boolean[][] moves;
 	protected ArrayList<Integer> possibleMoves;
 	

@@ -84,10 +84,10 @@ public class King extends Piece {
 			}
 		}
 		if(!firstMove)
-			castling(chessBoard);
+			castlingPossibleMoves(chessBoard);
 	}
 	
-	private void castling(Piece[][] chessBoard) {
+	private void castlingPossibleMoves(Piece[][] chessBoard) {
 		
 		Piece piece = chessBoard[row][0];
 		if(piece != null && piece instanceof Rook && !((Rook)piece).firstMove) {

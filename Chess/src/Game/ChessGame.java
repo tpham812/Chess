@@ -31,15 +31,14 @@ public class ChessGame {
 		checkMate = false;
 		draw = false;
 		player = true;
-		promoChoice = 0;
 		startGame();
 	}
 	
 	private static void startGame() throws IOException {
 		
 		while(!checkMate) {
-		
 			badInput = false;
+			promoChoice = '0';
 			chessBoard.displayChessBoard();
 			if(player) 
 				System.out.print("\nWhite's Move: ");
@@ -106,6 +105,10 @@ public class ChessGame {
 		if(moves.length == 3) {
 			if(moves[2].equals("draw?")) 
 				wantsDraw = true;
+			else if(moves[2].length() == 1)
+				promoChoice = moves[2].charAt(0);
+				if(promoChoice != 'Q' && promoChoice != 'N' && promoChoice != 'B' && promoChoice != 'R')
+					badInput = true;
 			else 
 				badInput = true;
 		}

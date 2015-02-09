@@ -30,7 +30,7 @@ public class Pawn extends Piece {
 				piece = chessBoard[newRow][newColumn];
 				piece2 = chessBoard[row][newColumn];
 				if(piece == null && piece2 != null && piece2.player != player) 
-					enPassant(piece2, newRow, newColumn);
+					enPassantPossibleMoves(piece2, newRow, newColumn);
 				else if(piece != null && piece.player != player ) {
 					moves[newRow][newColumn] = true;
 					possibleMoves.add(newRow * 10 + newColumn);
@@ -41,7 +41,7 @@ public class Pawn extends Piece {
 				piece = chessBoard[newRow][newColumn];
 				piece2 = chessBoard[row][newColumn];
 				if(piece == null && piece2 != null && piece2.player != player) 
-					enPassant(piece2, newRow, newColumn);
+					enPassantPossibleMoves(piece2, newRow, newColumn);
 				else if(piece != null && piece.player != player) {
 					moves[newRow][newColumn] = true;
 					possibleMoves.add(newRow * 10 + newColumn);
@@ -61,7 +61,7 @@ public class Pawn extends Piece {
 		}
 	}
 	
-	private void enPassant(Piece piece, int newRow, int newColumn) {
+	private void enPassantPossibleMoves(Piece piece, int newRow, int newColumn) {
 		
 		if(piece instanceof Pawn && ((Pawn)piece).justMoved2Ranks == true) {
 			moves[newRow][newColumn] = true;
