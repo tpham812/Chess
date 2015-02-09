@@ -134,6 +134,8 @@ public class ChessBoard {
 	
 	private void enPassant(int row, int newColumn) {
 		
+		Piece piece = chessBoard[row][newColumn];
+		removePieceFromCollections(piece.player, piece);
 		chessBoard[row][newColumn] = null;
 	}
 	
