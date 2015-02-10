@@ -9,6 +9,8 @@ public class ChessBoard {
 	private static Piece[][] chessBoard;				
 	private static ArrayList<Piece> blkPieces;			
 	private static ArrayList<Piece> whtPieces;	
+	private static Piece blkKing;
+	private static Piece whtKing;
 	
 	public ChessBoard() {
 		
@@ -33,7 +35,7 @@ public class ChessBoard {
 					if(j == 0 || j == 7) { Rook rook = new Rook(false, i, j); chessBoard[i][j] = rook; blkPieces.add(rook); }
 					else if(j == 1 || j == 6) { Knight knight = new Knight(false, i, j); chessBoard[i][j] = knight; blkPieces.add(knight); }
 					else if(j == 2 || j == 5) { Bishop bishop = new Bishop(false, i, j); chessBoard[i][j] = bishop; blkPieces.add(bishop); }
-					else if(j == 4) { King king = new King(false, i , j); chessBoard[i][j] = king; blkPieces.add(king); }
+					else if(j == 4) { King king = new King(false, i , j); chessBoard[i][j] = king; blkKing = king; blkPieces.add(king); }
 					else if (j == 3) { Queen queen = new Queen(false, i, j); chessBoard[i][j] = queen; blkPieces.add(queen); }
 				}
 				else if(i == 1) { Pawn pawn = new Pawn(false, i, j, 1); chessBoard[i][j] = pawn; blkPieces.add(pawn); }
@@ -42,7 +44,7 @@ public class ChessBoard {
 					if(j == 0 || j == 7) { Rook rook = new Rook(true, i, j); chessBoard[i][j] = rook; whtPieces.add(rook);}
 					else if(j == 1 || j == 6) { Knight knight = new Knight(true, i, j); chessBoard[i][j] = knight; whtPieces.add(knight);}
 					else if(j == 2 || j == 5) { Bishop bishop = new Bishop(true, i, j); chessBoard[i][j] = bishop; whtPieces.add(bishop);}
-					else if(j == 4) { King king = new King(true, i, j); chessBoard[i][j] = king; whtPieces.add(king);}
+					else if(j == 4) { King king = new King(true, i, j); chessBoard[i][j] = king; whtKing = king; whtPieces.add(king);}
 					else if (j == 3) { Queen queen = new Queen(true, i, j); chessBoard[i][j] = queen; whtPieces.add(queen);}
 				}
 			}
@@ -89,6 +91,12 @@ public class ChessBoard {
 					King castKing = (King)newPiece;
 					King castPiece = (King)piece;
 					castKing.setFirstMove(castPiece.getFirstMove());
+					if(player){
+						whtKing = newPiece;
+					}
+					else {
+						blkKing = newPiece;
+					}
 				}
 				if(player) {
 					whtPieces.add(newPiece);
@@ -182,6 +190,26 @@ public class ChessBoard {
 	public Piece[][] getChessBoard() {
 		
 		return chessBoard;
+	}
+	
+	public Piece getWhtKing() {
+		
+		return whtKing;
+	}
+	
+	public Piece getBlkKing() {
+		
+		return blkKing;
+	}
+	
+	public ArrayList<Piece> getWhtPieces() {
+		
+		return whtPieces;
+	}
+	
+	public ArrayList<Piece> getBlkPieces() {
+	
+		return blkPieces;
 	}
 	
 	private void enPassant(int row, int newColumn) {

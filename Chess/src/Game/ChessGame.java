@@ -11,7 +11,6 @@ import Pieces.Piece;
 public class ChessGame {
 
 	private static ChessBoard chessBoard;
-	private static boolean checkMate;
 	private static boolean player;
 	private static boolean draw;
 	private static boolean wantsDraw;
@@ -21,6 +20,7 @@ public class ChessGame {
 	private static int newRow;
 	private static int newColumn;
 	private static char promoChoice;
+	private static State state;
 	private static BufferedReader br; 
 	
 	public static void main(String[] args) throws IOException {
@@ -28,7 +28,7 @@ public class ChessGame {
 		br = new BufferedReader(new InputStreamReader(System.in));
 		chessBoard = new ChessBoard();
 		chessBoard.initialize();
-		checkMate = false;
+		state = new State();
 		draw = false;
 		player = true;
 		startGame();
@@ -36,7 +36,7 @@ public class ChessGame {
 	
 	private static void startGame() throws IOException {
 		
-		while(!checkMate) {
+		while(state.gameState != State.GameState.CHECKMATE) {
 			badInput = false;
 			promoChoice = '0';
 			chessBoard.displayChessBoard();

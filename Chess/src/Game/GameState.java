@@ -7,25 +7,68 @@ import Pieces.Piece;
 
 public class GameState {
 	
-	private ChessBoard chessBoard;
+	private static ChessBoard chessBoard;
 	
 	public GameState() {
 		
 		chessBoard = new ChessBoard();
 	}
 	
-	public boolean getGameState(ChessBoard chessBoard, boolean player) {
+	public void getGameState(ChessBoard chessBoardToClone, boolean player, State state) {
 		
-		cloneBoard(chessBoard, player);
-		
-		return false;
+		if(player) {
+			Piece blkKing = chessBoardToClone.getBlkKing();
+			ArrayList<Piece> blkPieces = chessBoardToClone.getBlkPieces();
+			if(blkKing.getPossibleMoves().size() == 0) {
+				chessBoard.cloneBoard(chessBoardToClone);
+			}
+			else {
+				if(isKingPositionUnderAttack(blkPieces, blkKing)) {
+					if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
+						chessBoard.cloneBoard(chessBoardToClone);
+					}
+					else {
+						state.gameState = State.GameState.CHECK;
+					}
+				}
+				else {
+					if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
+						chessBoard.cloneBoard(chessBoardToClone);
+					}
+					else {
+						state.gameState = State.GameState.NONE;
+					}
+				}
+
+			}
+		}
+		else {
+			Piece whtKing = chessBoardToClone.getWhtKing();
+			ArrayList<Piece> whtPieces = chessBoardToClone.getWhtPieces();
+			if(whtKing.getPossibleMoves().size() == 0) {
+				chessBoard.cloneBoard(chessBoardToClone);
+			}
+			else {
+				if(isKingPositionUnderAttack(whtPieces, whtKing)) {
+					if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
+						chessBoard.cloneBoard(chessBoardToClone);
+					}
+					else {
+						state.gameState = State.GameState.CHECK;
+					}
+				}
+				else {
+					if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
+						chessBoard.cloneBoard(chessBoardToClone);
+					}
+					else {
+						state.gameState = State.GameState.NONE;
+					}
+				}
+			}
+		}
 	}
-	
-	private void cloneBoard(ChessBoard chessBoard, boolean player) {
-		
-		
-	}	
-		
+			
 	private boolean isKingPositionUnderAttack(ArrayList<Piece> pieces, Piece king) {
 		
 		return isPositionUnderAttack(pieces, king.getRow(), king.getColumn());
