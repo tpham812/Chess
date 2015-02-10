@@ -49,19 +49,54 @@ public class ChessBoard {
 		}
 	}
 	
-	public void cloneBoard(ChessBoard chessBoard) {
+	public void cloneBoard(ChessBoard chessBoardToClone) {
 		
-		Piece[][] board = chessBoard.getChessBoard();
+		Piece[][] board = chessBoardToClone.getChessBoard();
+		setChessBoardEmpty();
+		whtPieces.clear();
+		blkPieces.clear();
+		
 		for(int i = 0; i < 8; i++) {
 			for(int j = 0; j < 8; j++) {
 				Piece piece = board[i][j];
+				if(piece == null) continue;
+				Piece newPiece = null;
+				boolean player = piece.getPlayer();
 				if(piece instanceof Pawn) {
-					Piece pawn = new Pawn(piece.getPlayer(), i, j, ((Pawn) piece).getDirection());
-					Pawn castPawn = (Pawn) pawn;
-					Pawn castPiece = (Pawn) piece;
+					newPiece = new Pawn(player, i, j, ((Pawn) piece).getDirection());
+					Pawn castPawn = (Pawn)newPiece;
+					Pawn castPiece = (Pawn)piece;
 					castPawn.setFirstMove(castPiece.getFirstMove());
 					castPawn.setJustMoved2Ranks(castPiece.getJustMoved2Ranks());
 				}
+				else if(piece instanceof Rook) {
+					newPiece = new Rook(player, i, j);
+					Rook castRook = (Rook)newPiece;
+					Rook castPiece = (Rook)piece;
+					castRook.setFirstMove(castPiece.getFirstMove());
+				}
+				else if(piece instanceof Bishop) {
+					newPiece = new Bishop(player, i, j);
+				}
+				else if(piece instanceof Knight) {
+					newPiece = new Knight(player, i, j);
+				}
+				else if(piece instanceof Queen) {
+					newPiece = new Queen(player, i, j);
+				}
+				else {
+					newPiece = new King(player, i, j);
+					King castKing = (King)newPiece;
+					King castPiece = (King)piece;
+					castKing.setFirstMove(castPiece.getFirstMove());
+				}
+				if(player) {
+					whtPieces.add(newPiece);
+				}
+				else {
+					blkPieces.add(newPiece);
+				}
+				chessBoard[i][j] = newPiece;
 			}
 		}
 	}
@@ -226,6 +261,15 @@ public class ChessBoard {
 		}
 		else {
 			blkPieces.remove(piece);
+		}
+	}
+	
+	private void setChessBoardEmpty() {
+		
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				chessBoard[i][j] = null;
+			}
 		}
 	}
 }

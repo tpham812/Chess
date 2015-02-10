@@ -92,4 +92,14 @@ public class Rook extends Piece {
 		row = newRow;
 		column = newColumn;
 	}
+	
+	public boolean getFirstMove() {
+		
+		return firstMove;
+	}
+	
+	public void setFirstMove(boolean firstMove) {
+		
+		this.firstMove = firstMove;
+	}
 }
