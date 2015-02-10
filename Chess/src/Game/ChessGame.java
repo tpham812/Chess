@@ -20,7 +20,7 @@ public class ChessGame {
 	private static int newRow;
 	private static int newColumn;
 	private static char promoChoice;
-	private static State state;
+	private static GameState gameState;
 	private static BufferedReader br; 
 	
 	public static void main(String[] args) throws IOException {
@@ -28,7 +28,7 @@ public class ChessGame {
 		br = new BufferedReader(new InputStreamReader(System.in));
 		chessBoard = new ChessBoard();
 		chessBoard.initialize();
-		state = new State();
+		gameState = new GameState();
 		draw = false;
 		player = true;
 		startGame();
@@ -36,7 +36,7 @@ public class ChessGame {
 	
 	private static void startGame() throws IOException {
 		
-		while(state.gameState != State.GameState.CHECKMATE) {
+		while(gameState.gameState != GameState.State.CHECKMATE) {
 			badInput = false;
 			promoChoice = '0';
 			chessBoard.displayChessBoard();
