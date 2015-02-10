@@ -19,51 +19,42 @@ public class GameStateTest {
 		if(player) {
 			Piece blkKing = chessBoardToClone.getBlkKing();
 			ArrayList<Piece> blkPieces = chessBoardToClone.getBlkPieces();
-			if(blkKing.getPossibleMoves().size() == 0) {
-				chessBoard.cloneBoard(chessBoardToClone);
-			}
-			else {
-				if(isKingPositionUnderAttack(blkPieces, blkKing)) {
-					if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
-						chessBoard.cloneBoard(chessBoardToClone);
-					}
-					else {
-						gameState.gameState = GameState.State.CHECK;
-					}
+
+			if(isKingPositionUnderAttack(blkPieces, blkKing)) {
+				if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
+					chessBoard.cloneBoard(chessBoardToClone);
 				}
 				else {
-					if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
-						chessBoard.cloneBoard(chessBoardToClone);
-					}
-					else {
-						gameState.gameState = GameState.State.NONE;
-					}
+					gameState.gameState = GameState.State.CHECK;
 				}
-
+			}
+			else {
+				if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
+					chessBoard.cloneBoard(chessBoardToClone);
+				}
+				else {
+					gameState.gameState = GameState.State.NONE;
+				}
 			}
 		}
 		else {
 			Piece whtKing = chessBoardToClone.getWhtKing();
 			ArrayList<Piece> whtPieces = chessBoardToClone.getWhtPieces();
-			if(whtKing.getPossibleMoves().size() == 0) {
-				chessBoard.cloneBoard(chessBoardToClone);
-			}
-			else {
-				if(isKingPositionUnderAttack(whtPieces, whtKing)) {
-					if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
-						chessBoard.cloneBoard(chessBoardToClone);
-					}
-					else {
-						gameState.gameState = GameState.State.CHECK;
-					}
+
+			if(isKingPositionUnderAttack(whtPieces, whtKing)) {
+				if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
+					chessBoard.cloneBoard(chessBoardToClone);
 				}
 				else {
-					if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
-						chessBoard.cloneBoard(chessBoardToClone);
-					}
-					else {
-						gameState.gameState = GameState.State.NONE;
-					}
+					gameState.gameState = GameState.State.CHECK;
+				}
+			}
+			else {
+				if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
+					chessBoard.cloneBoard(chessBoardToClone);
+				}
+				else {
+					gameState.gameState = GameState.State.NONE;
 				}
 			}
 		}
