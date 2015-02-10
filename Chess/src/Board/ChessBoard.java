@@ -49,6 +49,23 @@ public class ChessBoard {
 		}
 	}
 	
+	public void cloneBoard(ChessBoard chessBoard) {
+		
+		Piece[][] board = chessBoard.getChessBoard();
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < 8; j++) {
+				Piece piece = board[i][j];
+				if(piece instanceof Pawn) {
+					Piece pawn = new Pawn(piece.getPlayer(), i, j, ((Pawn) piece).getDirection());
+					Pawn castPawn = (Pawn) pawn;
+					Pawn castPiece = (Pawn) piece;
+					castPawn.setFirstMove(castPiece.getFirstMove());
+					castPawn.setJustMoved2Ranks(castPiece.getJustMoved2Ranks());
+				}
+			}
+		}
+	}
+	
 	public void displayChessBoard() {
 		
 		char alpha = 'a';

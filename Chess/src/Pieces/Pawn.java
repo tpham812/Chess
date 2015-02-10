@@ -77,4 +77,29 @@ public class Pawn extends Piece {
 		row = newRow;
 		column = newColumn;
 	}
+	
+	public int getDirection() {
+		
+		return direction;
+	}
+	
+	public boolean getFirstMove() {
+		
+		return firstMove;
+	}
+	
+	public void setFirstMove(boolean firstMove) {
+		
+		this.firstMove = firstMove;
+	}
+	
+	public boolean getJustMoved2Ranks() {
+		
+		return justMoved2Ranks;
+	}
+	
+	public void setJustMoved2Ranks(boolean justMove2Ranks) {
+		
+		this.justMoved2Ranks = justMove2Ranks;
+	}
 }

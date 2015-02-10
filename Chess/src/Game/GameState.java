@@ -24,46 +24,44 @@ public class GameState {
 	private void cloneBoard(ChessBoard chessBoard, boolean player) {
 		
 		
-	}
-	
-	private boolean isCheck(ArrayList<Piece> pieces, Piece king) {
-		
-		return isKingPositionUnderAttack(pieces, king);
-	}
-	
-	private boolean isCheckMate() {
-		
-		return false;
-	}
-	
-	private boolean isStaleMate() {
-	
-		return false;
 	}	
-	
+		
 	private boolean isKingPositionUnderAttack(ArrayList<Piece> pieces, Piece king) {
 		
-		int kingRowPosition = king.getRow();
-		int kingColumnPosition = king.getColumn();
+		return isPositionUnderAttack(pieces, king.getRow(), king.getColumn());
+	}
+	
+	private boolean isKingPossibleMovePositionUnderAttack(ArrayList<Piece> pieces, Piece king) {
+		
+		ArrayList<Integer> kingPossibleMoves = king.getPossibleMoves();
+		int kingPossibleMovesSize = kingPossibleMoves.size();
+		int numberOfPossibleMovesUnderAttack = 0;
+		
+		for(int i = 0; i < kingPossibleMovesSize; i++) {
+			int kingNumber = kingPossibleMoves.get(i);
+			int kingPossibleRow = kingNumber / 10;
+			int kingPossibleColumn = kingNumber % 10;
+			if(isPositionUnderAttack(pieces, kingPossibleRow, kingPossibleColumn)) {
+				numberOfPossibleMovesUnderAttack++;
+			}
+		}
+		return numberOfPossibleMovesUnderAttack == kingPossibleMovesSize;
+	}
+	
+	private boolean isPositionUnderAttack(ArrayList<Piece> pieces, int row, int column) {
 		
 		for(int i = 0; i < pieces.size(); i++) {
 			Piece piece = pieces.get(i);
 			ArrayList<Integer> possibleMoves = piece.getPossibleMoves();
 			for(int j = 0; j < possibleMoves.size(); j++) {
-				int number = possibleMoves.get(j);
-				int row = number / 10;
-				int column = number % 10;
-				if(row == kingRowPosition && column == kingColumnPosition) {
+				int pieceNumber = possibleMoves.get(j);
+				int pieceRow = pieceNumber / 10;
+				int pieceColumn = pieceNumber % 10;
+				if(row == pieceRow && column == pieceColumn) {
 					return true;
 				}
 			}
 		}
-		return false;
-	}
-	
-	private boolean isKingPossibleMovePositionUnderAttack(ArrayList<Piece> pieces, Piece king) {
-		
-		//To be implemented
 		return false;
 	}
 }
