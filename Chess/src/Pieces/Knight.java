@@ -16,6 +16,44 @@ public class Knight extends Piece {
 		resetMovesFalse();
 		possibleMoves.clear();
 		
+		newColumn = column + 2;
+		if(newColumn < 8) {
+			newRow = row + 1;
+			if(newRow < 8) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+			newRow = row - 1;
+			if(newRow >= 0) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+		}
+		newColumn = column - 2;
+		if(newColumn >= 0) {
+			newRow = row + 1;
+			if(newRow < 8) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+			newRow = row - 1;
+			if(newRow >= 0) {
+				piece = chessBoard[newRow][newColumn];
+				if(piece == null || piece.player != player) {
+					moves[newRow][newColumn] = true;
+					possibleMoves.add(newRow * 10 + newColumn);
+				}
+			}
+		}
 		newRow = row + 2;
 		if(newRow < 8) {
 			newColumn = column + 1;

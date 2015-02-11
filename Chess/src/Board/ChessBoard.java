@@ -6,11 +6,11 @@ import Pieces.*;
 
 public class ChessBoard {
 
-	private static Piece[][] chessBoard;				
-	private static ArrayList<Piece> blkPieces;			
-	private static ArrayList<Piece> whtPieces;	
-	private static Piece blkKing;
-	private static Piece whtKing;
+	private Piece[][] chessBoard;				
+	private ArrayList<Piece> blkPieces;			
+	private ArrayList<Piece> whtPieces;	
+	private Piece blkKing;
+	private Piece whtKing;
 	
 	public ChessBoard() {
 		
@@ -107,6 +107,8 @@ public class ChessBoard {
 				chessBoard[i][j] = newPiece;
 			}
 		}
+		updatePossibleMoves(true);
+		updatePossibleMoves(false);
 	}
 	
 	public void displayChessBoard() {

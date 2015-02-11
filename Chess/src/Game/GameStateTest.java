@@ -7,7 +7,7 @@ import Pieces.Piece;
 
 public class GameStateTest {
 	
-	private static ChessBoard chessBoard;
+	private ChessBoard chessBoard;
 	
 	public GameStateTest() {
 		
@@ -16,20 +16,33 @@ public class GameStateTest {
 	
 	public void getGameState(ChessBoard chessBoardToClone, boolean player, GameState gameState) {
 		
+		ArrayList<Piece> whtPieces = chessBoardToClone.getWhtPieces();
+		ArrayList<Piece> blkPieces = chessBoardToClone.getBlkPieces();
 		if(player) {
 			Piece blkKing = chessBoardToClone.getBlkKing();
-			ArrayList<Piece> blkPieces = chessBoardToClone.getBlkPieces();
-			if(isKingPositionUnderAttack(blkPieces, blkKing)) {
-				if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
+			if(isKingPositionUnderAttack(whtPieces, blkKing)) {
+				if(isKingPossibleMovePositionUnderAttack(whtPieces, blkKing)) {
 					chessBoard.cloneBoard(chessBoardToClone);
+					if(isThereLegalMove(chessBoardToClone, blkPieces, blkKing, player)) {
+						gameState.gameState = GameState.State.CHECK;
+					}
+					else {
+						gameState.gameState = GameState.State.CHECKMATE;
+					}
 				}
 				else {
 					gameState.gameState = GameState.State.CHECK;
 				}
 			}
 			else {
-				if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
+				if(isKingPossibleMovePositionUnderAttack(whtPieces, blkKing)) {
 					chessBoard.cloneBoard(chessBoardToClone);
+					if(isThereLegalMove(chessBoardToClone, blkPieces, blkKing, player)) {
+						gameState.gameState = GameState.State.NONE;
+					}
+					else {
+						gameState.gameState = GameState.State.STALEMATE;
+					}
 				}
 				else {
 					gameState.gameState = GameState.State.NONE;
@@ -38,24 +51,66 @@ public class GameStateTest {
 		}
 		else {
 			Piece whtKing = chessBoardToClone.getWhtKing();
-			ArrayList<Piece> whtPieces = chessBoardToClone.getWhtPieces();
-			if(isKingPositionUnderAttack(whtPieces, whtKing)) {
-				if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
+			if(isKingPositionUnderAttack(blkPieces, whtKing)) {
+				if(isKingPossibleMovePositionUnderAttack(blkPieces, whtKing)) {
 					chessBoard.cloneBoard(chessBoardToClone);
+					if(isThereLegalMove(chessBoardToClone, whtPieces, whtKing, player)) {
+						gameState.gameState = GameState.State.CHECK;
+					}
+					else {
+						gameState.gameState = GameState.State.CHECKMATE;
+					}
 				}
 				else {
 					gameState.gameState = GameState.State.CHECK;
 				}
 			}
 			else {
-				if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
+				if(isKingPossibleMovePositionUnderAttack(blkPieces, whtKing)) {
 					chessBoard.cloneBoard(chessBoardToClone);
+					if(isThereLegalMove(chessBoardToClone, whtPieces, whtKing, player)) {
+						gameState.gameState = GameState.State.NONE;
+					}
+					else {
+						gameState.gameState = GameState.State.STALEMATE;
+					}
 				}
 				else {
 					gameState.gameState = GameState.State.NONE;
 				}
 			}
 		}
+	}
+	
+	private boolean isThereLegalMove(ChessBoard chessBoardToClone, ArrayList<Piece> pieces, Piece king, boolean player) {
+		
+	
+		for(int i = 0; i < pieces.size(); i++) {
+			Piece currPiece = pieces.get(i);
+			ArrayList<Integer> possibleMoves = currPiece.getPossibleMoves();
+			int row = currPiece.getRow();
+			int column = currPiece.getColumn();
+			for(int j = 0; j < possibleMoves.size(); j++) {
+				int pieceNumber = possibleMoves.get(j);
+				int newRow = pieceNumber / 10;
+				int newColumn = pieceNumber % 10;
+				chessBoard.movePiece(row, column, newRow, newColumn, '0');
+				chessBoard.updatePossibleMoves(true);
+				chessBoard.updatePossibleMoves(false);
+				ArrayList<Piece> piecesToTest;
+				if(player) {
+					piecesToTest = chessBoard.getWhtPieces();
+				}
+				else {
+					piecesToTest = chessBoard.getBlkPieces();
+				}
+				if(!isKingPositionUnderAttack(piecesToTest, king)) {
+					return true;
+				}
+				chessBoard.cloneBoard(chessBoardToClone);
+			}
+		}
+		return false;
 	}
 			
 	private boolean isKingPositionUnderAttack(ArrayList<Piece> pieces, Piece king) {

@@ -21,6 +21,7 @@ public class ChessGame {
 	private static int newColumn;
 	private static char promoChoice;
 	private static GameState gameState;
+	private static GameStateTest gameStateTest;
 	private static BufferedReader br; 
 	
 	public static void main(String[] args) throws IOException {
@@ -29,6 +30,7 @@ public class ChessGame {
 		chessBoard = new ChessBoard();
 		chessBoard.initialize();
 		gameState = new GameState();
+		gameStateTest = new GameStateTest();
 		draw = false;
 		player = true;
 		startGame();
@@ -36,7 +38,7 @@ public class ChessGame {
 	
 	private static void startGame() throws IOException {
 		
-		while(gameState.gameState != GameState.State.CHECKMATE) {
+		while(gameState.gameState != GameState.State.CHECKMATE && gameState.gameState != GameState.State.STALEMATE) {
 			badInput = false;
 			promoChoice = '0';
 			chessBoard.displayChessBoard();
@@ -60,6 +62,36 @@ public class ChessGame {
 						if(isValidMove()) {
 							chessBoard.movePiece(row, column, newRow, newColumn, promoChoice);
 							chessBoard.updatePossibleMoves(!player);
+							chessBoard.updatePossibleMoves(player);
+							gameStateTest.getGameState(chessBoard, player, gameState);
+							switch(gameState.gameState) {
+								case CHECKMATE:
+									if(player) {
+										System.out.println("White wins. Black is in CheckMate.");
+									}
+									else {
+										System.out.println("Black wins. White is in CheckMate.");
+									}
+									break;
+								case STALEMATE:
+									if(player) {
+										System.out.println("White wins. Black is in StaleMate.");
+									}
+									else {
+										System.out.println("Black wins. White is in StaleMate.");
+									}
+									break;
+								case CHECK:
+									if(player) {
+										System.out.println("Black is in Check.");
+									}
+									else {
+										System.out.println("White is in Check.");
+									}
+									break;
+								default:
+									break;
+							}
 							player = !player;
 						}
 						else 
