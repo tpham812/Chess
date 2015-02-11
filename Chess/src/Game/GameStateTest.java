@@ -19,7 +19,6 @@ public class GameStateTest {
 		if(player) {
 			Piece blkKing = chessBoardToClone.getBlkKing();
 			ArrayList<Piece> blkPieces = chessBoardToClone.getBlkPieces();
-
 			if(isKingPositionUnderAttack(blkPieces, blkKing)) {
 				if(isKingPossibleMovePositionUnderAttack(blkPieces, blkKing)) {
 					chessBoard.cloneBoard(chessBoardToClone);
@@ -40,7 +39,6 @@ public class GameStateTest {
 		else {
 			Piece whtKing = chessBoardToClone.getWhtKing();
 			ArrayList<Piece> whtPieces = chessBoardToClone.getWhtPieces();
-
 			if(isKingPositionUnderAttack(whtPieces, whtKing)) {
 				if(isKingPossibleMovePositionUnderAttack(whtPieces, whtKing)) {
 					chessBoard.cloneBoard(chessBoardToClone);

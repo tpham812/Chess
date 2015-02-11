@@ -65,9 +65,9 @@ public class ChessBoard {
 				Piece newPiece = null;
 				boolean player = piece.getPlayer();
 				if(piece instanceof Pawn) {
-					newPiece = new Pawn(player, i, j, ((Pawn) piece).getDirection());
-					Pawn castPawn = (Pawn)newPiece;
 					Pawn castPiece = (Pawn)piece;
+					newPiece = new Pawn(player, i, j, castPiece.getDirection());
+					Pawn castPawn = (Pawn)newPiece;
 					castPawn.setFirstMove(castPiece.getFirstMove());
 					castPawn.setJustMoved2Ranks(castPiece.getJustMoved2Ranks());
 				}
@@ -132,7 +132,8 @@ public class ChessBoard {
 				else {
 					if(i % 2 == 0) {
 						if(j % 2 == 0) System.out.print("   "); else System.out.print("## ");}
-					else {if(j % 2 == 0) System.out.print("## "); else System.out.print("   ");}
+					else {
+						if(j % 2 == 0) System.out.print("## "); else System.out.print("   ");}
 				}
 			}
 			System.out.println();
@@ -176,9 +177,9 @@ public class ChessBoard {
 	
 	public boolean isPieceAtLocation(int row, int column) {
 		
-		if(chessBoard[row][column] != null)
+		if(chessBoard[row][column] != null) {
 			return true;
-		
+		}
 		return false;
 	}
 	
