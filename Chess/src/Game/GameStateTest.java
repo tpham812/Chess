@@ -3,6 +3,7 @@ package Game;
 import java.util.ArrayList;
 
 import Board.ChessBoard;
+import Pieces.King;
 import Pieces.Piece;
 
 public class GameStateTest {
@@ -16,9 +17,19 @@ public class GameStateTest {
 	
 	public void getGameState(ChessBoard chessBoardToClone, boolean player, GameState gameState) {
 		
-
+		if(player) {
+			King whtKing = (King)chessBoardToClone.getWhtKing();
+			if(whtKing.getIsCheck()) {
+				gameState.gameState = GameState.State.CHECK;
+			}
+		}
+		else {
+			King blkKing = (King)chessBoardToClone.getBlkKing();
+			if(blkKing.getIsCheck()) {
+				gameState.gameState = GameState.State.CHECK;
+			}
+		}
 	}
-	
 	/*private boolean isThereLegalMove(ChessBoard chessBoardToClone, ArrayList<Piece> pieces, Piece king, boolean player) {
 		
 	
