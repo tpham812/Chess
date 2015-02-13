@@ -1,14 +1,18 @@
 package Pieces;
 
+import java.util.ArrayList;
+
 public class King extends Piece {
 
 	private boolean firstMove;
+	private boolean isCheck;
 	
 	public King(boolean player, int row, int column) {
 		
 		super(player, row, column);
 		setMovesFalse();
 		firstMove = false;
+		isCheck = false;
 	}
 
 	public void updatePossibleMoves(Piece[][] chessBoard) {
@@ -83,11 +87,12 @@ public class King extends Piece {
 				}
 			}
 		}
-		if(!firstMove)
-			castlingPossibleMoves(chessBoard);
+		
 	}
 	
-	private void castlingPossibleMoves(Piece[][] chessBoard) {
+	public void updateCastlingPossibleMoves(Piece[][] chessBoard) {
+		
+		if(firstMove && isCheck) return;
 		
 		Piece piece = chessBoard[row][0];
 		if(piece != null && piece instanceof Rook && !((Rook)piece).firstMove) {
@@ -123,6 +128,46 @@ public class King extends Piece {
 		}
 	}
 	
+	public void testForCheck(ArrayList<Piece> enemyPieces) {
+		
+		if(isPositionUnderAttack(enemyPieces, row, column)) {
+			isCheck = true;
+		}
+		else {
+			isCheck = false;
+		}
+	}
+	
+	public void removePossibleMovesUnderAttack(ArrayList<Piece> enemyPieces) {
+		
+		for(int i = 0; i < possibleMoves.size(); i++) {
+			int kingNumber = possibleMoves.get(i);
+			int possibleRow = kingNumber / 10;
+			int possibleColumn = kingNumber % 10;
+			if(isPositionUnderAttack(enemyPieces, possibleRow, possibleColumn)) {
+				possibleMoves.remove(i);
+				moves[possibleRow][possibleColumn] = false;
+				i--;
+			}
+		}
+	}
+	private boolean isPositionUnderAttack(ArrayList<Piece> pieces, int row, int column) {
+		
+		for(int i = 0; i < pieces.size(); i++) {
+			Piece piece = pieces.get(i);
+			ArrayList<Integer> possibleMoves = piece.getPossibleMoves();
+			for(int j = 0; j < possibleMoves.size(); j++) {
+				int pieceNumber = possibleMoves.get(j);
+				int pieceRow = pieceNumber / 10;
+				int pieceColumn = pieceNumber % 10;
+				if(row == pieceRow && column == pieceColumn) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public void updatePosition(int newRow, int newColumn) {
 		
 		firstMove = true;
@@ -138,5 +183,10 @@ public class King extends Piece {
 	public void setFirstMove(boolean firstMove) {
 		
 		this.firstMove = firstMove;
+	}
+	
+	public boolean getIsCheck() {
+		
+		return isCheck;
 	}
 }

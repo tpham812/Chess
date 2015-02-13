@@ -38,7 +38,7 @@ public class ChessGame {
 	
 	private static void startGame() throws IOException {
 		
-		while(gameState.gameState != GameState.State.CHECKMATE && gameState.gameState != GameState.State.STALEMATE) {
+		while(true) {
 			badInput = false;
 			promoChoice = '0';
 			chessBoard.displayChessBoard();
@@ -61,37 +61,7 @@ public class ChessGame {
 					if(isPlayerPiece()) {
 						if(isValidMove()) {
 							chessBoard.movePiece(row, column, newRow, newColumn, promoChoice);
-							chessBoard.updatePossibleMoves(!player);
-							chessBoard.updatePossibleMoves(player);
-							gameStateTest.getGameState(chessBoard, player, gameState);
-							switch(gameState.gameState) {
-								case CHECKMATE:
-									if(player) {
-										System.out.println("White wins. Black is in CheckMate.");
-									}
-									else {
-										System.out.println("Black wins. White is in CheckMate.");
-									}
-									break;
-								case STALEMATE:
-									if(player) {
-										System.out.println("White wins. Black is in StaleMate.");
-									}
-									else {
-										System.out.println("Black wins. White is in StaleMate.");
-									}
-									break;
-								case CHECK:
-									if(player) {
-										System.out.println("Black is in Check.");
-									}
-									else {
-										System.out.println("White is in Check.");
-									}
-									break;
-								default:
-									break;
-							}
+							chessBoard.updatePossibleMoves();
 							player = !player;
 						}
 						else 

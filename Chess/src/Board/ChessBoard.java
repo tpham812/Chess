@@ -9,8 +9,8 @@ public class ChessBoard {
 	private Piece[][] chessBoard;				
 	private ArrayList<Piece> blkPieces;			
 	private ArrayList<Piece> whtPieces;	
-	private Piece blkKing;
-	private Piece whtKing;
+	private King blkKing;
+	private King whtKing;
 	
 	public ChessBoard() {
 		
@@ -22,8 +22,7 @@ public class ChessBoard {
 	public void initialize() {
 		
 		createChessBoard();
-		updatePossibleMoves(false);
-		updatePossibleMoves(true);
+		updatePossibleMoves();	
 	}
 	
 	private void createChessBoard() {
@@ -35,7 +34,7 @@ public class ChessBoard {
 					if(j == 0 || j == 7) { Rook rook = new Rook(false, i, j); chessBoard[i][j] = rook; blkPieces.add(rook); }
 					else if(j == 1 || j == 6) { Knight knight = new Knight(false, i, j); chessBoard[i][j] = knight; blkPieces.add(knight); }
 					else if(j == 2 || j == 5) { Bishop bishop = new Bishop(false, i, j); chessBoard[i][j] = bishop; blkPieces.add(bishop); }
-					else if(j == 4) { King king = new King(false, i , j); chessBoard[i][j] = king; blkKing = king; blkPieces.add(king); }
+					else if(j == 4) { King king = new King(false, i , j); chessBoard[i][j] = king; blkKing = king; blkPieces.add(king);}
 					else if (j == 3) { Queen queen = new Queen(false, i, j); chessBoard[i][j] = queen; blkPieces.add(queen); }
 				}
 				else if(i == 1) { Pawn pawn = new Pawn(false, i, j, 1); chessBoard[i][j] = pawn; blkPieces.add(pawn); }
@@ -92,10 +91,10 @@ public class ChessBoard {
 					King castPiece = (King)piece;
 					castKing.setFirstMove(castPiece.getFirstMove());
 					if(player){
-						whtKing = newPiece;
+						whtKing = (King)newPiece;
 					}
 					else {
-						blkKing = newPiece;
+						blkKing = (King)newPiece;
 					}
 				}
 				if(player) {
@@ -107,8 +106,7 @@ public class ChessBoard {
 				chessBoard[i][j] = newPiece;
 			}
 		}
-		updatePossibleMoves(true);
-		updatePossibleMoves(false);
+		updatePossibleMoves();
 	}
 	
 	public void displayChessBoard() {
@@ -142,16 +140,20 @@ public class ChessBoard {
 		}
 	}
 	
-	public void updatePossibleMoves(boolean player) {
+	public void updatePossibleMoves() {
 		
-		if(player) {
-			for(int i = 0; i < whtPieces.size(); i++) 
-				whtPieces.get(i).updatePossibleMoves(chessBoard);
+		for(int i = 0; i < whtPieces.size(); i++) {
+			whtPieces.get(i).updatePossibleMoves(chessBoard);
 		}
-		else {
-			for(int i = 0; i < blkPieces.size(); i++) 
-				blkPieces.get(i).updatePossibleMoves(chessBoard);
+		for(int i = 0; i < blkPieces.size(); i++) { 
+			blkPieces.get(i).updatePossibleMoves(chessBoard);
 		}
+		whtKing.testForCheck(blkPieces);
+		blkKing.testForCheck(whtPieces);
+		whtKing.updateCastlingPossibleMoves(chessBoard);
+		blkKing.updateCastlingPossibleMoves(chessBoard);
+		whtKing.removePossibleMovesUnderAttack(blkPieces);
+		blkKing.removePossibleMovesUnderAttack(whtPieces);
 	}
 	
 	public void movePiece(int row, int column, int newRow, int newColumn, char promoChoice) {
